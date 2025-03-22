@@ -19,11 +19,25 @@ public class PlanetsList implements PlanetCreator{
     }
 
     @Override
-    public void add_planet(Planet planet) throws DuplicatePlanetException {
-        if(planets.stream().anyMatch(planet1->planet.getName().equals(planet.getName()))) {
+    public void addPlanet(Planet planet) throws DuplicatePlanetException {
+        if(planets.stream().anyMatch(planet1->planet1.getName().equals(planet.getName()))) {
             throw new DuplicatePlanetException("Planet already exists!");
         }else{
             planets.add(planet);
         }
     }
+
+    public Planet searchPlanet(String planetName) throws NoPlanetException {
+        if (planets.isEmpty()) {
+            throw new NoPlanetException("There is no planet with this name!");
+        } else {
+            for (Planet planet : planets) {
+                if (planet.getName().equals(planetName)) {
+                    return planet;
+                }
+            }
+            return null;
+        }
+    }
+
 }
