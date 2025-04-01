@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.b1.f23621705;
 
-public class Jedi implements JediCreator{
+public class Jedi{
     private final double MAX_STRENGTH = 2;
 
     private String name;
@@ -89,11 +89,5 @@ public class Jedi implements JediCreator{
         } else {
             this.planet = planet;
         }
-    }
-
-    @Override
-    public void addJedi(Jedi jedi) throws DuplicateJediException, NoPlanetException {
-        PlanetsList.getPlanetsInstance().searchPlanet(getPlanet()).addJedi(this);
-        JediList.getJedisInstance().addJedi(this);
     }
 }

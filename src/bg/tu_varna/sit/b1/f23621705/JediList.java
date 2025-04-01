@@ -14,12 +14,29 @@ public class JediList implements JediCreator {
         return jedisInstance;
     }
 
+    public List<Jedi> getJedis() {
+        return jedis;
+    }
+
     @Override
-    public void addJedi(Jedi jedi) throws DuplicateJediException {
+    public void createJedi(Jedi jedi) throws DuplicateJediException {
         if (jedis.stream().anyMatch(jedi1 -> jedi1.getName().equals(jedi.getName()))) {
             throw new DuplicateJediException("Jedi already exists!");
         } else {
             jedis.add(jedi);
+        }
+    }
+
+    public Jedi searchJedi(String jediName) throws NoJediException {
+        if (jedis.isEmpty()) {
+            throw new NoJediException("The jedi list is empty!");
+        } else {
+            for (Jedi jedi : jedis) {
+                if (jedi.getName().equals(jediName)) {
+                    return jedi;
+                }
+            }
+            return null;
         }
     }
 }

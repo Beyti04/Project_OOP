@@ -9,7 +9,7 @@ public class Planet {
 
     public Planet(String name) throws InvalidDataException {
         this.setName(name);
-        this.jedis=new ArrayList<>();
+        this.jedis = new ArrayList<>();
     }
 
     public String getName() {
@@ -20,16 +20,19 @@ public class Planet {
         return jedis;
     }
 
-    public void addJedi(Jedi jedi){
-        jedis.add(jedi);
+    public void createJedi(Jedi jedi) throws DuplicateJediException {
+        if (jedis.contains(jedi)) {
+            throw new DuplicateJediException("There is already this jedi on this planet!");
+        } else {
+            jedis.add(jedi);
+        }
     }
 
-    public void setName(String name) throws InvalidDataException{
-        if(name.isBlank()){
+    public void setName(String name) throws InvalidDataException {
+        if (name.isBlank()) {
             throw new InvalidDataException("There must be valid data for NAME!");
-        }
-        else {
-            this.name=name;
+        } else {
+            this.name = name;
         }
     }
 }

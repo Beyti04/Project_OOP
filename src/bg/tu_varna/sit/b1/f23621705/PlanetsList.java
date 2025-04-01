@@ -27,9 +27,13 @@ public class PlanetsList implements PlanetCreator{
         }
     }
 
+    public List<Planet> getPlanets() {
+        return planets;
+    }
+
     public Planet searchPlanet(String planetName) throws NoPlanetException {
         if (planets.isEmpty()) {
-            throw new NoPlanetException("There is no planet with this name!");
+            throw new NoPlanetException("There is no planets!");
         } else {
             for (Planet planet : planets) {
                 if (planet.getName().equals(planetName)) {
@@ -40,4 +44,18 @@ public class PlanetsList implements PlanetCreator{
         }
     }
 
+    public Jedi searchJedi(String name) throws NoPlanetException {
+        if(planets.isEmpty()){
+            throw new NoPlanetException("There is no planets!");
+        }else{
+            for(Planet planet: planets){
+                for(Jedi jedi:planet.getJedis()){
+                    if(jedi.getName().equals(name)){
+                        return jedi;
+                    }
+                }
+            }
+            return null;
+        }
+    }
 }
