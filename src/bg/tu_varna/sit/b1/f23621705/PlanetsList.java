@@ -1,5 +1,8 @@
 package bg.tu_varna.sit.b1.f23621705;
 
+import bg.tu_varna.sit.b1.f23621705.exceptions.DuplicatePlanetException;
+import bg.tu_varna.sit.b1.f23621705.exceptions.NoPlanetException;
+
 import java.util.ArrayList;
 import java.util.List;
 

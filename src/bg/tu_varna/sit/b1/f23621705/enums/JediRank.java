@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.b1.f23621705;
+package bg.tu_varna.sit.b1.f23621705.enums;
 
 public enum JediRank {
     YOUNGLING, INITIATE, PADAWAN, KNIGHT_ASPIRANT, KNIGHT, MASTER, BATTLE_MASTER, GRAND_MASTER

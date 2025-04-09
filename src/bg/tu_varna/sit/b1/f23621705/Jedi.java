@@ -1,6 +1,11 @@
 package bg.tu_varna.sit.b1.f23621705;
 
-public class Jedi{
+import bg.tu_varna.sit.b1.f23621705.enums.JediRank;
+import bg.tu_varna.sit.b1.f23621705.enums.LightsaberColour;
+import bg.tu_varna.sit.b1.f23621705.exceptions.InvalidDataException;
+import bg.tu_varna.sit.b1.f23621705.exceptions.NoPlanetException;
+
+public class Jedi {
     private final double MAX_STRENGTH = 2;
 
     private String name;
@@ -10,7 +15,7 @@ public class Jedi{
     private Double strength;
     private String planet;
 
-    public Jedi(String name, JediRank jediRank, int age, LightsaberColour lightsaberColour, double strength, String planet) throws InvalidDataException, NoPlanetException {
+    public Jedi(String name, JediRank jediRank, int age, LightsaberColour lightsaberColour, double strength, String planet) throws NoPlanetException, InvalidDataException {
         this.setName(name);
         this.setJediRank(jediRank);
         this.setAge(age);
