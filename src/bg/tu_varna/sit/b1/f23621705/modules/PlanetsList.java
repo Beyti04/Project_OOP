@@ -1,17 +1,18 @@
-package bg.tu_varna.sit.b1.f23621705;
+package bg.tu_varna.sit.b1.f23621705.modules;
 
 import bg.tu_varna.sit.b1.f23621705.exceptions.DuplicatePlanetException;
 import bg.tu_varna.sit.b1.f23621705.exceptions.NoPlanetException;
+import bg.tu_varna.sit.b1.f23621705.interfaces.PlanetCreator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanetsList implements PlanetCreator{
+public class PlanetsList implements PlanetCreator {
     private static PlanetsList planetsInstance;
     private List<Planet> planets;
 
-    private PlanetsList(){
-        planets=new ArrayList<>();
+    private PlanetsList() {
+        planets = new ArrayList<>();
     }
 
     public static PlanetsList getPlanetsInstance() {
@@ -23,9 +24,9 @@ public class PlanetsList implements PlanetCreator{
 
     @Override
     public void addPlanet(Planet planet) throws DuplicatePlanetException {
-        if(planets.stream().anyMatch(planet1->planet1.getName().equals(planet.getName()))) {
+        if (planets.stream().anyMatch(planet1 -> planet1.getName().equals(planet.getName()))) {
             throw new DuplicatePlanetException("Planet already exists!");
-        }else{
+        } else {
             planets.add(planet);
         }
     }
@@ -48,12 +49,12 @@ public class PlanetsList implements PlanetCreator{
     }
 
     public Jedi searchJedi(String name) throws NoPlanetException {
-        if(planets.isEmpty()){
+        if (planets.isEmpty()) {
             throw new NoPlanetException("There is no planets!");
-        }else{
-            for(Planet planet: planets){
-                for(Jedi jedi:planet.getJedis()){
-                    if(jedi.getName().equals(name)){
+        } else {
+            for (Planet planet : planets) {
+                for (Jedi jedi : planet.getJedis()) {
+                    if (jedi.getName().equals(name)) {
                         return jedi;
                     }
                 }

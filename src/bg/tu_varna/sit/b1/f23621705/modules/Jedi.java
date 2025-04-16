@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.b1.f23621705;
+package bg.tu_varna.sit.b1.f23621705.modules;
 
 import bg.tu_varna.sit.b1.f23621705.enums.JediRank;
 import bg.tu_varna.sit.b1.f23621705.enums.LightsaberColour;
@@ -94,5 +94,17 @@ public class Jedi {
         } else {
             this.planet = planet;
         }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("\nName: ").append(name);
+        sb.append("\nRank: ").append(jediRank);
+        sb.append("\nAge: ").append(age);
+        sb.append("\nLight saber colour: ").append(lightsaberColour);
+        sb.append("\nStrength: ").append(strength);
+        sb.append("\nPlanet: ").append(planet);
+        return sb.toString();
     }
 }

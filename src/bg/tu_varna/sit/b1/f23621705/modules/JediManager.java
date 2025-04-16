@@ -1,11 +1,14 @@
-package bg.tu_varna.sit.b1.f23621705;
+package bg.tu_varna.sit.b1.f23621705.modules;
 
 import bg.tu_varna.sit.b1.f23621705.enums.JediRank;
+import bg.tu_varna.sit.b1.f23621705.enums.LightsaberColour;
 import bg.tu_varna.sit.b1.f23621705.exceptions.*;
+import bg.tu_varna.sit.b1.f23621705.interfaces.JediCreator;
+import bg.tu_varna.sit.b1.f23621705.interfaces.JediRemover;
 
-import java.util.List;
+import java.util.*;
 
-public class JediManager implements JediCreator,JediRemover {
+public class JediManager implements JediCreator, JediRemover {
     private final double MAX_STRENGTH = 2;
     private final double MIN_STRENGTH = 0;
 
@@ -104,22 +107,90 @@ public class JediManager implements JediCreator,JediRemover {
         }
     }
 
-    public Jedi getYoungestJedi(String planetName) throws NoJediException, NoPlanetException {
-        if (PlanetsList.getPlanetsInstance().searchJedi(planetName) == null) {
+    public Jedi getYoungestJedi(String planetName, JediRank rank) throws NoJediException, NoPlanetException {
+        if (PlanetsList.getPlanetsInstance().searchPlanet(planetName) == null) {
             throw new NoPlanetException("There is no such planet!");
         } else {
             if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().isEmpty()) {
                 throw new NoJediException("There is no jedis on this planet");
             } else {
-                List<Jedi> jedis = PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis();
-                Jedi currentYoungest = jedis.get(0);
-                for (Jedi jedi : jedis) {
-                    if (currentYoungest.getAge() > jedi.getAge()) {
-                        currentYoungest = jedi;
+                if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
+
+                    List<Jedi> jedis = new ArrayList<>();
+                    for (Jedi jedi : PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis()) {
+                        if (jedi.getJediRank().equals(rank)) {
+                            jedis.add(jedi);
+                        }
                     }
+                    return Collections.min(jedis, Comparator.comparing(Jedi::getAge).thenComparing(Jedi::getName));
+                } else {
+                    throw new NoJediException("There are no jedis with this rank on this planet!");
                 }
-                return currentYoungest;
             }
+        }
+    }
+
+    public LightsaberColour mostUsedLightSaberColour(String planetName, JediRank rank) throws NoPlanetException, NoJediException {
+        if (PlanetsList.getPlanetsInstance().searchPlanet(planetName) == null) {
+            throw new NoPlanetException("There is no such planet!");
+        } else {
+            if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().isEmpty()) {
+                throw new NoJediException("There is no jedis on this planet");
+            } else {
+                if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
+
+                    List<Jedi> jedis = new ArrayList<>();
+                    for (Jedi jedi : PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis()) {
+                        if (jedi.getJediRank().equals(rank)) {
+                            jedis.add(jedi);
+                        }
+                    }
+
+                    Map<LightsaberColour, Integer> counter = new HashMap<>();
+                    for (Jedi jedi : jedis) {
+                        counter.put(jedi.getLightsaberColour(), counter.getOrDefault(jedi.getLightsaberColour(), 0) + 1);
+                    }
+
+                    LightsaberColour mostUsed = null;
+                    int maxCount = 0;
+                    for (Map.Entry<LightsaberColour, Integer> entry : counter.entrySet()) {
+                        if (entry.getValue() > maxCount) {
+                            mostUsed = entry.getKey();
+                            maxCount = entry.getValue();
+                        }
+                    }
+
+                    return mostUsed;
+                } else {
+                    throw new NoJediException("There are no jedis with this rank on this planet!");
+                }
+            }
+        }
+    }
+
+    public String printByPlanetName(String planetName) throws NoPlanetException, NoJediException {
+        if (PlanetsList.getPlanetsInstance().searchPlanet(planetName) == null) {
+            throw new NoPlanetException("There are no such planet!");
+        } else {
+            if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().isEmpty()) {
+                throw new NoJediException("There are no jedis on this planet!");
+            } else {
+                Planet planet = PlanetsList.getPlanetsInstance().searchPlanet(planetName);
+                return planet.toString();
+            }
+        }
+    }
+
+    public String printByPlanetName(String planet1, String planet2) throws NoPlanetException, NoJediException {
+        return this.printByPlanetName(planet1) + this.printByPlanetName(planet2);
+    }
+
+    public String printByJediName(String name) throws NoJediException {
+        if (JediList.getJedisInstance().searchJedi(name) == null) {
+            throw new NoJediException("There is no such jedi!");
+        } else {
+            Jedi jedi = JediList.getJedisInstance().searchJedi(name);
+            return jedi.toString();
         }
     }
 }
