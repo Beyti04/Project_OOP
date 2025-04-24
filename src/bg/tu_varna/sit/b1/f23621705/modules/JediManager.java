@@ -2,7 +2,6 @@ package bg.tu_varna.sit.b1.f23621705.modules;
 
 import bg.tu_varna.sit.b1.f23621705.enums.JediRank;
 import bg.tu_varna.sit.b1.f23621705.enums.LightsaberColour;
-import bg.tu_varna.sit.b1.f23621705.exceptions.*;
 import bg.tu_varna.sit.b1.f23621705.interfaces.JediCreator;
 import bg.tu_varna.sit.b1.f23621705.interfaces.JediRemover;
 
@@ -10,93 +9,104 @@ import java.util.*;
 
 public class JediManager implements JediCreator, JediRemover {
     private final double MAX_STRENGTH = 2;
-    private final double MIN_STRENGTH = 0;
+    private final double MIN_STRENGTH = 1;
 
     @Override
-    public void createJedi(Jedi jedi) throws DuplicateJediException, NoPlanetException {
-        JediList.getJedisInstance().createJedi(jedi);
-        PlanetsList.getPlanetsInstance().searchPlanet(jedi.getPlanet()).createJedi(jedi);
+    public void createJedi(Jedi jedi) {
+        if(JediList.getJedisInstance().getJedi(jedi.getName())==null&&PlanetsList.getPlanetsInstance().getPlanet(jedi.getPlanet()).getJedi(jedi.getName())==null){
+            JediList.getJedisInstance().createJedi(jedi);
+            PlanetsList.getPlanetsInstance().getPlanet(jedi.getPlanet()).createJedi(jedi);
+        }else{
+            System.out.println("Jedi already exists!");
+        }
     }
 
     @Override
-    public void removeJedi(String name, String planetName) throws NoPlanetException, NoJediException {
-        if (JediList.getJedisInstance().searchJedi(name) == null) {
-            throw new NoJediException("There is no jedi with this name!");
+    public void removeJedi(String name, String planetName){
+        if (JediList.getJedisInstance().getJedi(name) == null) {
+            System.out.println("There is no jedi with this name!");
         } else {
-            if (PlanetsList.getPlanetsInstance().searchPlanet(planetName) == null) {
-                throw new NoPlanetException("There is no planet with this name");
+            if (PlanetsList.getPlanetsInstance().getPlanet(planetName) == null) {
+                System.out.println("There is no planet with this name");
             } else {
-                if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().contains(JediList.getJedisInstance().searchJedi(name))) {
-                    PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().remove(JediList.getJedisInstance().searchJedi(name));
-                    JediList.getJedisInstance().getJedis().remove(JediList.getJedisInstance().searchJedi(name));
+                if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().contains(JediList.getJedisInstance().getJedi(name))) {
+                    PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().remove(JediList.getJedisInstance().getJedi(name));
+                    JediList.getJedisInstance().getJedis().remove(JediList.getJedisInstance().getJedi(name));
                 } else {
-                    throw new NoJediException("There is no jedi with the name of " + name + " on planet " + planetName);
+                    System.out.println("There is no jedi with the name of " + name + " on planet " + planetName);
                 }
             }
         }
     }
 
-    void promoteJedi(String name, Double multiplier) throws MaxRankException, InvalidDataException, NoJediException, NoPlanetException {
-        if (JediList.getJedisInstance().searchJedi(name) == null) {
-            throw new NoJediException("There is no jedi with this name!");
-        } else if (JediList.getJedisInstance().searchJedi(name).getJediRank() == JediRank.GRAND_MASTER) {
-            throw new MaxRankException("The highest rank has been reached!");
+    public Jedi getJedi(String name){
+        if(JediList.getJedisInstance().getJedi(name)!=null){
+            return JediList.getJedisInstance().getJedi(name);
+        }
+        return null;
+    }
+
+    public void promoteJedi(String name, Double multiplier) {
+        if (JediList.getJedisInstance().getJedi(name) == null) {
+            System.out.println("There is no jedi with this name!");
+        } else if (JediList.getJedisInstance().getJedi(name).getJediRank() == JediRank.GRAND_MASTER) {
+            System.out.println("The highest rank has been reached!");
         } else {
             JediRank[] ranks = JediRank.values();
-            int current = JediList.getJedisInstance().searchJedi(name).getJediRank().ordinal();
-            JediList.getJedisInstance().searchJedi(name).setJediRank(ranks[current + 1]);
-            PlanetsList.getPlanetsInstance().searchJedi(name).setJediRank(ranks[current + 1]);
+            int current = JediList.getJedisInstance().getJedi(name).getJediRank().ordinal();
+            JediList.getJedisInstance().getJedi(name).setJediRank(ranks[current + 1]);
+            PlanetsList.getPlanetsInstance().getJedi(name).setJediRank(ranks[current + 1]);
 
             if (multiplier != null && multiplier < 0) {
-                double strength = JediList.getJedisInstance().searchJedi(name).getStrength();
+                double strength = JediList.getJedisInstance().getJedi(name).getStrength();
                 strength += multiplier * strength;
                 if (strength < MAX_STRENGTH) {
-                    JediList.getJedisInstance().searchJedi(name).setStrength(strength);
-                    PlanetsList.getPlanetsInstance().searchJedi(name).setStrength(strength);
+                    JediList.getJedisInstance().getJedi(name).setStrength(strength);
+                    PlanetsList.getPlanetsInstance().getJedi(name).setStrength(strength);
                 } else {
-                    throw new InvalidDataException("Strength too high!");
+                    System.out.println("Strength too high!");
                 }
             } else {
-                throw new InvalidDataException("There must be valid data for multiplier!");
+                System.out.println("There must be valid data for multiplier!");
             }
         }
     }
 
-    void demoteJedi(String name, Double multiplier) throws MinRankException, InvalidDataException, NoJediException, NoPlanetException {
-        if (JediList.getJedisInstance().searchJedi(name) == null) {
-            throw new NoJediException("There is no jedi with this name!");
-        } else if (JediList.getJedisInstance().searchJedi(name).getJediRank() == JediRank.YOUNGLING) {
-            throw new MinRankException("The lowest rank has been reached!");
+    public void demoteJedi(String name, Double multiplier) {
+        if (JediList.getJedisInstance().getJedi(name) == null) {
+            System.out.println("There is no jedi with this name!");
+        } else if (JediList.getJedisInstance().getJedi(name).getJediRank() == JediRank.YOUNGLING) {
+            System.out.println("The lowest rank has been reached!");
         } else {
             JediRank[] ranks = JediRank.values();
-            int current = JediList.getJedisInstance().searchJedi(name).getJediRank().ordinal();
-            JediList.getJedisInstance().searchJedi(name).setJediRank(ranks[current - 1]);
-            PlanetsList.getPlanetsInstance().searchJedi(name).setJediRank(ranks[current - 1]);
+            int current = JediList.getJedisInstance().getJedi(name).getJediRank().ordinal();
+            JediList.getJedisInstance().getJedi(name).setJediRank(ranks[current - 1]);
+            PlanetsList.getPlanetsInstance().getJedi(name).setJediRank(ranks[current - 1]);
 
             if (multiplier != null && multiplier > 0) {
-                double strength = JediList.getJedisInstance().searchJedi(name).getStrength();
+                double strength = JediList.getJedisInstance().getJedi(name).getStrength();
                 strength -= multiplier * strength;
                 if (strength > MIN_STRENGTH) {
-                    JediList.getJedisInstance().searchJedi(name).setStrength(strength);
-                    PlanetsList.getPlanetsInstance().searchJedi(name).setStrength(strength);
+                    JediList.getJedisInstance().getJedi(name).setStrength(strength);
+                    PlanetsList.getPlanetsInstance().getJedi(name).setStrength(strength);
                 } else {
-                    throw new InvalidDataException("Strength too low!");
+                    JediList.getJedisInstance().getJedi(name).setStrength(MIN_STRENGTH);
                 }
             } else {
-                throw new InvalidDataException("There must be valid data for multiplier!");
+                System.out.println("There must be valid data for multiplier!");
             }
         }
     }
 
-    public Jedi getStrongestJedi(String planetName) throws NoJediException, NoPlanetException {
-        if (PlanetsList.getPlanetsInstance().searchPlanet(planetName) == null) {
-            throw new NoPlanetException("There is no such planet!");
+    public Jedi getStrongestJedi(String planetName) {
+        if (PlanetsList.getPlanetsInstance().getPlanet(planetName) == null) {
+            System.out.println("There is no such planet!");
         } else {
-            if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().isEmpty()) {
-                throw new NoJediException("There are no jedis on this planet!");
+            if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().isEmpty()) {
+                System.out.println("There are no jedis on this planet!");
             } else {
-                List<Jedi> jedis = PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis();
-                Jedi currentStrongest = jedis.get(0);
+                List<Jedi> jedis = PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis();
+                Jedi currentStrongest = jedis.getFirst();
                 for (Jedi jedi : jedis) {
                     if (currentStrongest.getStrength() < jedi.getStrength()) {
                         currentStrongest = jedi;
@@ -105,42 +115,44 @@ public class JediManager implements JediCreator, JediRemover {
                 return currentStrongest;
             }
         }
+        return null;
     }
 
-    public Jedi getYoungestJedi(String planetName, JediRank rank) throws NoJediException, NoPlanetException {
-        if (PlanetsList.getPlanetsInstance().searchPlanet(planetName) == null) {
-            throw new NoPlanetException("There is no such planet!");
+    public Jedi getYoungestJedi(String planetName, JediRank rank) {
+        if (PlanetsList.getPlanetsInstance().getPlanet(planetName) == null) {
+            System.out.println("There is no planet with this name!");
         } else {
-            if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().isEmpty()) {
-                throw new NoJediException("There is no jedis on this planet");
+            if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().isEmpty()) {
+                System.out.println("There is no jedis on this planet!");
             } else {
-                if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
+                if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
 
                     List<Jedi> jedis = new ArrayList<>();
-                    for (Jedi jedi : PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis()) {
+                    for (Jedi jedi : PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis()) {
                         if (jedi.getJediRank().equals(rank)) {
                             jedis.add(jedi);
                         }
                     }
                     return Collections.min(jedis, Comparator.comparing(Jedi::getAge).thenComparing(Jedi::getName));
                 } else {
-                    throw new NoJediException("There are no jedis with this rank on this planet!");
+                    System.out.println("There are no jedis with this rank on this planet!");
                 }
             }
         }
+        return null;
     }
 
-    public LightsaberColour mostUsedLightSaberColour(String planetName, JediRank rank) throws NoPlanetException, NoJediException {
-        if (PlanetsList.getPlanetsInstance().searchPlanet(planetName) == null) {
-            throw new NoPlanetException("There is no such planet!");
+    public LightsaberColour mostUsedLightSaberColour(String planetName, JediRank rank) {
+        if (PlanetsList.getPlanetsInstance().getPlanet(planetName) == null) {
+            System.out.println("There is no planet with this name!");
         } else {
-            if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().isEmpty()) {
-                throw new NoJediException("There is no jedis on this planet");
+            if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().isEmpty()) {
+                System.out.println("There is no jedis on this planet!");
             } else {
-                if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
+                if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
 
                     List<Jedi> jedis = new ArrayList<>();
-                    for (Jedi jedi : PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis()) {
+                    for (Jedi jedi : PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis()) {
                         if (jedi.getJediRank().equals(rank)) {
                             jedis.add(jedi);
                         }
@@ -162,34 +174,35 @@ public class JediManager implements JediCreator, JediRemover {
 
                     return mostUsed;
                 } else {
-                    throw new NoJediException("There are no jedis with this rank on this planet!");
+                    System.out.println("There are no jedis with this rank on this planet!");
                 }
             }
         }
+        return null;
     }
 
-    public String printByPlanetName(String planetName) throws NoPlanetException, NoJediException {
-        if (PlanetsList.getPlanetsInstance().searchPlanet(planetName) == null) {
-            throw new NoPlanetException("There are no such planet!");
+    public String printByPlanetName(String planetName) {
+        if (PlanetsList.getPlanetsInstance().getPlanet(planetName) == null) {
+            return "There are no such planet!";
         } else {
-            if (PlanetsList.getPlanetsInstance().searchPlanet(planetName).getJedis().isEmpty()) {
-                throw new NoJediException("There are no jedis on this planet!");
+            if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().isEmpty()) {
+                return "There are no jedis on this planet!";
             } else {
-                Planet planet = PlanetsList.getPlanetsInstance().searchPlanet(planetName);
+                Planet planet = PlanetsList.getPlanetsInstance().getPlanet(planetName);
                 return planet.toString();
             }
         }
     }
 
-    public String printByPlanetName(String planet1, String planet2) throws NoPlanetException, NoJediException {
+    public String printByPlanetName(String planet1, String planet2) {
         return this.printByPlanetName(planet1) + this.printByPlanetName(planet2);
     }
 
-    public String printByJediName(String name) throws NoJediException {
-        if (JediList.getJedisInstance().searchJedi(name) == null) {
-            throw new NoJediException("There is no such jedi!");
+    public String printByJediName(String name) {
+        if (JediList.getJedisInstance().getJedi(name) == null) {
+            return "There is no jedi with this name!";
         } else {
-            Jedi jedi = JediList.getJedisInstance().searchJedi(name);
+            Jedi jedi = JediList.getJedisInstance().getJedi(name);
             return jedi.toString();
         }
     }

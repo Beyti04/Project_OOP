@@ -1,14 +1,12 @@
 package bg.tu_varna.sit.b1.f23621705.modules;
-
-import bg.tu_varna.sit.b1.f23621705.exceptions.DuplicateJediException;
-import bg.tu_varna.sit.b1.f23621705.exceptions.NoJediException;
 import bg.tu_varna.sit.b1.f23621705.interfaces.JediCreator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JediList implements JediCreator {
     private static JediList jedisInstance;
-    private List<Jedi> jedis;
+    private final List<Jedi> jedis=new ArrayList<>();
 
     public static JediList getJedisInstance() {
         if (jedisInstance == null) {
@@ -22,24 +20,20 @@ public class JediList implements JediCreator {
     }
 
     @Override
-    public void createJedi(Jedi jedi) throws DuplicateJediException {
-        if (jedis.stream().anyMatch(jedi1 -> jedi1.getName().equals(jedi.getName()))) {
-            throw new DuplicateJediException("Jedi already exists!");
-        } else {
-            jedis.add(jedi);
-        }
+    public void createJedi(Jedi jedi) {
+        jedis.add(jedi);
     }
 
-    public Jedi searchJedi(String jediName) throws NoJediException {
+    public Jedi getJedi(String jediName) {
         if (jedis.isEmpty()) {
-            throw new NoJediException("The jedi list is empty!");
+            System.out.println("The jedi list is empty!");
         } else {
             for (Jedi jedi : jedis) {
                 if (jedi.getName().equals(jediName)) {
                     return jedi;
                 }
             }
-            return null;
         }
+        return null;
     }
 }

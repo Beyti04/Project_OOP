@@ -1,13 +1,12 @@
 package bg.tu_varna.sit.b1.f23621705.modules;
 
-import bg.tu_varna.sit.b1.f23621705.exceptions.DuplicatePlanetException;
-import bg.tu_varna.sit.b1.f23621705.exceptions.NoPlanetException;
 import bg.tu_varna.sit.b1.f23621705.interfaces.PlanetCreator;
+import bg.tu_varna.sit.b1.f23621705.interfaces.PlanetRemover;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanetsList implements PlanetCreator {
+public class PlanetsList implements PlanetCreator, PlanetRemover {
     private static PlanetsList planetsInstance;
     private List<Planet> planets;
 
@@ -23,11 +22,12 @@ public class PlanetsList implements PlanetCreator {
     }
 
     @Override
-    public void addPlanet(Planet planet) throws DuplicatePlanetException {
+    public void createPlanet(Planet planet) {
         if (planets.stream().anyMatch(planet1 -> planet1.getName().equals(planet.getName()))) {
-            throw new DuplicatePlanetException("Planet already exists!");
+            System.out.println("Planet already exists!");
         } else {
             planets.add(planet);
+            System.out.println("Planet successfully created!");
         }
     }
 
@@ -35,22 +35,29 @@ public class PlanetsList implements PlanetCreator {
         return planets;
     }
 
-    public Planet searchPlanet(String planetName) throws NoPlanetException {
+    public Planet getPlanet(String planetName) {
         if (planets.isEmpty()) {
-            throw new NoPlanetException("There is no planets!");
+            return null;
         } else {
             for (Planet planet : planets) {
                 if (planet.getName().equals(planetName)) {
                     return planet;
                 }
             }
-            return null;
+        }
+        return null;
+    }
+
+    @Override
+    public void removePlanet(String planetName) {
+        if(getPlanet(planetName)!=null){
+            planets.remove(getPlanet(planetName));
         }
     }
 
-    public Jedi searchJedi(String name) throws NoPlanetException {
+    public Jedi getJedi(String name) {
         if (planets.isEmpty()) {
-            throw new NoPlanetException("There is no planets!");
+            System.out.println("There is no planets!");
         } else {
             for (Planet planet : planets) {
                 for (Jedi jedi : planet.getJedis()) {
@@ -59,7 +66,7 @@ public class PlanetsList implements PlanetCreator {
                     }
                 }
             }
-            return null;
         }
+        return null;
     }
 }

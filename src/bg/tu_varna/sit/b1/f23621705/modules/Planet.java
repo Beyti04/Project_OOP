@@ -1,17 +1,14 @@
 package bg.tu_varna.sit.b1.f23621705.modules;
 
-import bg.tu_varna.sit.b1.f23621705.exceptions.DuplicateJediException;
-import bg.tu_varna.sit.b1.f23621705.exceptions.InvalidDataException;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class Planet {
     private String name;
-    private List<Jedi> jedis;
+    private final List<Jedi> jedis;
 
-    public Planet(String name) throws InvalidDataException {
+    public Planet(String name) {
         this.setName(name);
         this.jedis = new ArrayList<>();
     }
@@ -24,20 +21,23 @@ public class Planet {
         return jedis;
     }
 
-    public void createJedi(Jedi jedi) throws DuplicateJediException {
-        if (jedis.contains(jedi)) {
-            throw new DuplicateJediException("There is already this jedi on this planet!");
-        } else {
-            jedis.add(jedi);
-        }
+    public void createJedi(Jedi jedi) {
+        jedis.add(jedi);
     }
 
-    public void setName(String name) throws InvalidDataException {
-        if (name.isBlank()) {
-            throw new InvalidDataException("There must be valid data for NAME!");
-        } else {
-            this.name = name;
+    public Jedi getJedi(String name){
+        if(jedis.stream().anyMatch(jedi1->jedi1.getName().equals(name))){
+            for (Jedi jedi:jedis){
+                if(jedi.getName().equals(name)){
+                    return jedi;
+                }
+            }
         }
+            return null;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
