@@ -26,7 +26,7 @@ public class JediList implements JediCreator {
 
     public Jedi getJedi(String jediName) {
         if (jedis.isEmpty()) {
-            System.out.println("The jedi list is empty!");
+            return null;
         } else {
             for (Jedi jedi : jedis) {
                 if (jedi.getName().equals(jediName)) {
