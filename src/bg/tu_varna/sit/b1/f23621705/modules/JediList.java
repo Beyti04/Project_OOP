@@ -1,4 +1,5 @@
 package bg.tu_varna.sit.b1.f23621705.modules;
+
 import bg.tu_varna.sit.b1.f23621705.interfaces.JediCreator;
 
 import java.util.ArrayList;
@@ -6,7 +7,7 @@ import java.util.List;
 
 public class JediList implements JediCreator {
     private static JediList jedisInstance;
-    private final List<Jedi> jedis=new ArrayList<>();
+    private final List<Jedi> jedis = new ArrayList<>();
 
     public static JediList getJedisInstance() {
         if (jedisInstance == null) {
@@ -22,6 +23,10 @@ public class JediList implements JediCreator {
     @Override
     public void createJedi(Jedi jedi) {
         jedis.add(jedi);
+    }
+
+    public void removeAll(){
+        jedis.removeAll(jedis);
     }
 
     public Jedi getJedi(String jediName) {

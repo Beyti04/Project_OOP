@@ -8,52 +8,80 @@ import bg.tu_varna.sit.b1.f23621705.modules.JediManager;
 import bg.tu_varna.sit.b1.f23621705.modules.Planet;
 import bg.tu_varna.sit.b1.f23621705.modules.PlanetsList;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class AddJedi implements Command {
+public class CreateJedi implements Command {
     private final JediManager jediManager;
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
 
     private final double MAX_STRENGTH = 2;
     private final double MIN_STRENGTH = 1;
 
-    private final List<JediRank> ranks= List.of(JediRank.values());
+    private final List<JediRank> ranks = List.of(JediRank.values());
     private final List<LightsaberColour> colours = List.of(LightsaberColour.values());
 
 
-    public AddJedi(JediManager jediManager) {
+    public CreateJedi(JediManager jediManager, Scanner scanner) {
         this.jediManager = jediManager;
+        this.scanner = scanner;
     }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) throws IOException {
         boolean flag;
 
         String input;
+        String planet = null;
         String name = null;
         JediRank rank = null;
         int age = 0;
         LightsaberColour lightsaberColour = null;
         double strength = 0;
-        String planet = null;
 
-        String line = "=".repeat(20);
+        String line = "=".repeat(30);
         System.out.println(line);
+
+        System.out.println("Planet: ");
+        do {
+            flag = true;
+            input = scanner.nextLine();
+
+            if (input.isBlank()) {
+                System.out.println("Please enter valid data for planet!");
+            } else if (PlanetsList.getPlanetsInstance().getPlanet(input) == null) {
+                String temp = input;
+                System.out.println("There is no planet with this name!");
+                System.out.println("Do you want to create a planet with this name?  Y/N    YES/NO");
+                input = scanner.nextLine();
+                if (input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("YES")) {
+                    PlanetsList.getPlanetsInstance().createPlanet(new Planet(temp));
+                    planet = temp;
+                    flag = false;
+                }else{
+                    throw new IOException("There should be valid data for planet!");
+                }
+            } else {
+                planet = input;
+                flag = false;
+            }
+        } while (flag);
 
         System.out.println("Name: ");
         do {
             flag = true;
             input = scanner.nextLine();
+
             if (input.isBlank()) {
                 System.out.println("Please enter valid data for the name!");
             } else {
-                if (jediManager.getJedi(name) == null) {
+                if (jediManager.getJedi(input) == null) {
                     name = input;
                     flag = false;
+                } else {
+                    throw new IOException("There is already a jedi with the name " + input);
                 }
-
             }
         } while (flag);
 
@@ -62,6 +90,7 @@ public class AddJedi implements Command {
             flag = true;
             input = scanner.nextLine().toUpperCase();
             String finalInput = input;
+
             if (input.isBlank() || ranks.stream().noneMatch(rank1 -> rank1.name().equals(finalInput))) {
                 System.out.println("Please enter valid data for rank!");
             } else {
@@ -74,6 +103,7 @@ public class AddJedi implements Command {
         do {
             flag = true;
             input = scanner.nextLine();
+
             if (input.isBlank() || !input.matches("\\d+") || input.equals("0")) {
                 System.out.println("Please enter valid data for age!");
             } else {
@@ -86,6 +116,7 @@ public class AddJedi implements Command {
         do {
             flag = true;
             input = scanner.nextLine().toUpperCase();
+
             String finalInput = input;
             if (input.isBlank() || colours.stream().noneMatch(colour1 -> colour1.name().equals(finalInput))) {
                 System.out.println("Please enter valid data for a light saber colour!");
@@ -99,6 +130,7 @@ public class AddJedi implements Command {
         do {
             flag = true;
             input = scanner.nextLine();
+
             if (input.isBlank() || input.matches("\\d+") || Double.parseDouble(input) < MIN_STRENGTH || Double.parseDouble(input) > MAX_STRENGTH) {
                 System.out.println("Please enter valid data for strength!");
             } else {
@@ -107,30 +139,8 @@ public class AddJedi implements Command {
             }
         } while (flag);
 
-        System.out.println("Planet: ");
-        do {
-            flag = true;
-            input = scanner.nextLine();
-            if (input.isBlank()) {
-                System.out.println("Please enter valid data for planet!");
-            } else if (PlanetsList.getPlanetsInstance().getPlanet(input) == null) {
-                String temp = input;
-                System.out.println("There is no planet with this name!");
-                System.out.println("Do you want to create a planet with this name?  Y/N    YES/NO");
-                input = scanner.nextLine();
-                if (input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("YES")) {
-                    PlanetsList.getPlanetsInstance().createPlanet(new Planet(temp));
-                    planet = temp;
-                    flag = false;
-                }
-            } else {
-                planet = input;
-                flag = false;
-            }
-        } while (flag);
+        System.out.println(line);
 
-        jediManager.createJedi(new Jedi(name, rank, age, lightsaberColour, strength, planet));
-
-        System.out.println(PlanetsList.getPlanetsInstance().getPlanet(planet).toString());
+        jediManager.createJedi(new Jedi(planet, name, rank, age, lightsaberColour, strength));
     }
 }

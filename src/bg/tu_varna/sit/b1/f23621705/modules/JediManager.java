@@ -29,9 +29,15 @@ public class JediManager implements JediCreator, JediRemover {
 
     public Jedi getJedi(String name) {
         if (JediList.getJedisInstance().getJedi(name) != null && PlanetsList.getPlanetsInstance().getJedi(name) != null) {
+
             return JediList.getJedisInstance().getJedi(name);
+        } else {
+            return null;
         }
-        return null;
+    }
+
+    public List<Jedi> getJedis() {
+        return JediList.getJedisInstance().getJedis();
     }
 
     public void promoteJedi(String name, Double multiplier) {
@@ -91,34 +97,34 @@ public class JediManager implements JediCreator, JediRemover {
         return Collections.min(jedis, Comparator.comparing(Jedi::getAge).thenComparing(Jedi::getName));
     }
 
-    public LightsaberColour mostUsedLightSaberColour(String planetName){
-        List<Jedi> jedis=PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis();
-        Set<LightsaberColour> colours=new HashSet<>();
-        List<Jedi> allowedJedis=new ArrayList<>();
-        Map<LightsaberColour,Integer> counter=new HashMap<>();
-        LightsaberColour mostUsed=null;
-        int maxCount=0;
+    public LightsaberColour mostUsedLightSaberColour(String planetName) {
+        List<Jedi> jedis = PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis();
+        Set<LightsaberColour> colours = new HashSet<>();
+        List<Jedi> allowedJedis = new ArrayList<>();
+        Map<LightsaberColour, Integer> counter = new HashMap<>();
+        LightsaberColour mostUsed = null;
+        int maxCount = 0;
 
-        for(Jedi jedi:jedis){
-            if(jedi.getJediRank().equals(JediRank.GRAND_MASTER)){
+        for (Jedi jedi : jedis) {
+            if (jedi.getJediRank().equals(JediRank.GRAND_MASTER)) {
                 colours.add(jedi.getLightsaberColour());
             }
         }
 
-        for(Jedi jedi:jedis){
-            if(colours.contains(jedi.getLightsaberColour())){
+        for (Jedi jedi : jedis) {
+            if (colours.contains(jedi.getLightsaberColour())) {
                 allowedJedis.add(jedi);
             }
         }
 
-        for(Jedi jedi: allowedJedis){
-            counter.put(jedi.getLightsaberColour(),counter.getOrDefault(jedi.getLightsaberColour(),0)+1);
+        for (Jedi jedi : allowedJedis) {
+            counter.put(jedi.getLightsaberColour(), counter.getOrDefault(jedi.getLightsaberColour(), 0) + 1);
         }
 
-        for(Map.Entry<LightsaberColour,Integer> entry:counter.entrySet()){
-            if(entry.getValue()>maxCount){
-                mostUsed=entry.getKey();
-                maxCount=entry.getValue();
+        for (Map.Entry<LightsaberColour, Integer> entry : counter.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                mostUsed = entry.getKey();
+                maxCount = entry.getValue();
             }
         }
 
@@ -164,5 +170,10 @@ public class JediManager implements JediCreator, JediRemover {
         Jedi jedi = JediList.getJedisInstance().getJedi(name);
         return jedi.toString();
 
+    }
+
+    public void removeAll(){
+        JediList.getJedisInstance().removeAll();
+        PlanetsList.getPlanetsInstance().removeAll();
     }
 }

@@ -5,8 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Planet {
-    private String name;
     private final List<Jedi> jedis;
+    private String name;
 
     public Planet(String name) {
         this.setName(name);
@@ -17,6 +17,10 @@ public class Planet {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<Jedi> getJedis() {
         return jedis;
     }
@@ -25,19 +29,15 @@ public class Planet {
         jedis.add(jedi);
     }
 
-    public Jedi getJedi(String name){
-        if(jedis.stream().anyMatch(jedi1->jedi1.getName().equals(name))){
-            for (Jedi jedi:jedis){
-                if(jedi.getName().equals(name)){
+    public Jedi getJedi(String name) {
+        if (jedis.stream().anyMatch(jedi1 -> jedi1.getName().equals(name))) {
+            for (Jedi jedi : jedis) {
+                if (jedi.getName().equals(name)) {
                     return jedi;
                 }
             }
         }
-            return null;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return null;
     }
 
     @Override

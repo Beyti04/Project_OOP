@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PlanetsList implements PlanetCreator, PlanetRemover {
     private static PlanetsList planetsInstance;
-    private List<Planet> planets;
+    private final List<Planet> planets;
 
     private PlanetsList() {
         planets = new ArrayList<>();
@@ -27,7 +27,6 @@ public class PlanetsList implements PlanetCreator, PlanetRemover {
             System.out.println("Planet already exists!");
         } else {
             planets.add(planet);
-            System.out.println("Planet successfully created!");
         }
     }
 
@@ -50,9 +49,13 @@ public class PlanetsList implements PlanetCreator, PlanetRemover {
 
     @Override
     public void removePlanet(String planetName) {
-        if(getPlanet(planetName)!=null){
+        if (getPlanet(planetName) != null) {
             planets.remove(getPlanet(planetName));
         }
+    }
+
+    public void removeAll(){
+        planets.removeAll(planets);
     }
 
     public Jedi getJedi(String name) {
