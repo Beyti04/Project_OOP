@@ -5,7 +5,6 @@ import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
 import bg.tu_varna.sit.b1.f23621705.interfaces.FileSupplier;
 import bg.tu_varna.sit.b1.f23621705.modules.FileManager;
 import bg.tu_varna.sit.b1.f23621705.modules.Jedi;
-import bg.tu_varna.sit.b1.f23621705.modules.JediList;
 import bg.tu_varna.sit.b1.f23621705.modules.JediManager;
 
 import java.util.List;

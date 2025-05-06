@@ -10,6 +10,7 @@ import java.io.IOException;
 public class PromoteJedi implements Command {
     private final JediManager jediManager;
 
+
     public PromoteJedi(JediManager jediManager) {
         this.jediManager = jediManager;
     }
@@ -25,7 +26,7 @@ public class PromoteJedi implements Command {
         if (jediManager.getJedi(name) != null) {
             if (jediManager.getJedi(name).getJediRank() != JediRank.GRAND_MASTER) {
                 String multiplier = args[2];
-                if (multiplier.isBlank() || !multiplier.matches("\\d+")) {
+                if (multiplier.isBlank() || !multiplier.matches("([0-9]*[.])?[0-9]+")) {
                     throw new IOException("There must be valid data for the multiplier!");
                 } else {
                     jediManager.promoteJedi(name, Double.parseDouble(multiplier));

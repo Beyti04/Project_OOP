@@ -9,7 +9,7 @@ public class Jedi {
     private String name;
     private JediRank jediRank;
     private int age;
-    private LightsaberColour lightsaberColour;
+    private final LightsaberColour lightsaberColour;
     private double strength;
 
 
@@ -51,10 +51,6 @@ public class Jedi {
         return lightsaberColour;
     }
 
-    public void setLightsaberColour(LightsaberColour lightsaberColour) {
-        this.lightsaberColour = lightsaberColour;
-    }
-
     public double getStrength() {
         return strength;
     }
@@ -73,12 +69,15 @@ public class Jedi {
 
     @Override
     public String toString() {
-        String sb = "\nName: " + name +
-                "\nPlanet: " + planet +
-                "\nRank: " + jediRank +
-                "\nAge: " + age +
-                "\nLight saber colour: " + lightsaberColour +
-                "\nStrength: " + strength;
+        String line = "=".repeat(30);
+        String sb = '\n' + line + '\n' +
+                "Name: " + name + '\n' +
+                "Planet: " + planet + '\n' +
+                "Rank: " + jediRank + '\n' +
+                "Age: " + age + '\n' +
+                "Saber colour: " + lightsaberColour + '\n' +
+                "Strength: " + strength + '\n' +
+                line + '\n';
         return sb;
     }
 }

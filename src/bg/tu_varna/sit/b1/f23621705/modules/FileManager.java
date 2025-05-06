@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileManager {
+    /**
+     * Чете данни от файл
+     *
+     * @param filePath параметър за път към файл
+     * @return връща данните от прочетения файл под формата на на списък
+     * @throws Exception
+     */
     public static List<Jedi> readFile(String filePath) throws Exception {
         File file = new File(filePath);
 
@@ -42,6 +49,13 @@ public class FileManager {
         return jedis;
     }
 
+    /**
+     * Записва данни във файл
+     *
+     * @param filePath параметър за път към файл
+     * @param jedis    параметър за списък от данни, които ще се запишат във файла
+     * @throws Exception
+     */
     public static void saveToFile(String filePath, List<Jedi> jedis) throws Exception {
         File file = new File(filePath);
 
@@ -50,12 +64,12 @@ public class FileManager {
         } else {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (Jedi jedi : jedis) {
-                    String line = jedi.getName() +
+                    String line = jedi.getPlanet() +
+                            "|" + jedi.getName() +
                             "|" + jedi.getJediRank() +
                             "|" + jedi.getAge() +
                             "|" + jedi.getLightsaberColour() +
-                            "|" + jedi.getStrength() +
-                            "|" + jedi.getPlanet();
+                            "|" + jedi.getStrength();
 
                     writer.write(line);
                     writer.newLine();

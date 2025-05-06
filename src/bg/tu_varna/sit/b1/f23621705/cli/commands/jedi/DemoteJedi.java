@@ -25,7 +25,7 @@ public class DemoteJedi implements Command {
         if (jediManager.getJedi(name) != null) {
             if (jediManager.getJedi(name).getJediRank() != JediRank.YOUNGLING) {
                 String multiplier = args[2];
-                if (multiplier.isBlank() || !multiplier.matches("\\d+")) {
+                if (multiplier.isBlank() || !multiplier.matches("([0-9]*[.])?[0-9]+")) {
                     throw new IOException("There must be valid data for the multiplier!");
                 } else {
                     jediManager.demoteJedi(name, Double.parseDouble(multiplier));

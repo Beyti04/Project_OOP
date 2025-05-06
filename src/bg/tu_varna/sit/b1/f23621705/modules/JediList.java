@@ -9,6 +9,11 @@ public class JediList implements JediCreator {
     private static JediList jedisInstance;
     private final List<Jedi> jedis = new ArrayList<>();
 
+    /**
+     * Функция за вземане на инстанцията на сингълтън списък с джедай
+     *
+     * @return Връща инстанцията на сингълтън класа
+     */
     public static JediList getJedisInstance() {
         if (jedisInstance == null) {
             jedisInstance = new JediList();
@@ -20,15 +25,29 @@ public class JediList implements JediCreator {
         return jedis;
     }
 
+    /**
+     * Добавя джедай към списъка
+     *
+     * @param jedi параметър за джедай
+     */
     @Override
     public void createJedi(Jedi jedi) {
         jedis.add(jedi);
     }
 
-    public void removeAll(){
+    /**
+     * Премахва всички джедаи
+     */
+    public void removeAll() {
         jedis.removeAll(jedis);
     }
 
+    /**
+     * Взема даден джедай по име
+     *
+     * @param jediName параметър за име
+     * @return Връща обект от тип Jedi ако съществува
+     */
     public Jedi getJedi(String jediName) {
         if (jedis.isEmpty()) {
             return null;

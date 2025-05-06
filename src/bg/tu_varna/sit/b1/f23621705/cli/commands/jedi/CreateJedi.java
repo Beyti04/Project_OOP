@@ -59,7 +59,7 @@ public class CreateJedi implements Command {
                     PlanetsList.getPlanetsInstance().createPlanet(new Planet(temp));
                     planet = temp;
                     flag = false;
-                }else{
+                } else {
                     throw new IOException("There should be valid data for planet!");
                 }
             } else {

@@ -27,7 +27,7 @@ public class GetMostUsedLightsaberColour implements Command {
                 if (rank.isBlank() || ranks.stream().noneMatch(rank1 -> rank1.name().equals(rank))) {
                     throw new IOException("There is no jedi with the rank of " + rank + " on the planet " + planet);
                 } else {
-                    System.out.println("The most used light saber colour is: " + jediManager.mostUsedLightSaberColour(planet, ranks.stream().filter(rank1 -> rank1.name().equals(rank)).findFirst().get()));
+                    System.out.println("The most used light saber colour on the planet " + planet + "\nby the jedis with rank " + rank + " is " + jediManager.mostUsedLightSaberColour(planet, ranks.stream().filter(rank1 -> rank1.name().equals(rank)).findFirst().get()));
                 }
             } else {
                 throw new IOException("There is no planet with the name " + planet);
@@ -36,7 +36,7 @@ public class GetMostUsedLightsaberColour implements Command {
             String planet = args[1];
             if (PlanetsList.getPlanetsInstance().getPlanet(planet) != null) {
                 if (PlanetsList.getPlanetsInstance().getPlanet(planet).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(JediRank.GRAND_MASTER))) {
-                    System.out.println("The most used light saber colour is: " + jediManager.mostUsedLightSaberColour(planet));
+                    System.out.println("The most used light saber colour on the planet " + planet + " is " + jediManager.mostUsedLightSaberColour(planet));
                 } else {
                     throw new IOException("There are no jedis with the rank GRAND_MASTER on the planet " + planet);
                 }

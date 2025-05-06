@@ -29,6 +29,12 @@ public class Planet {
         jedis.add(jedi);
     }
 
+    /**
+     * Взема джедай по име от планетата
+     *
+     * @param name име на джедай
+     * @return връща обект от типа Jedi
+     */
     public Jedi getJedi(String name) {
         if (jedis.stream().anyMatch(jedi1 -> jedi1.getName().equals(name))) {
             for (Jedi jedi : jedis) {
@@ -43,17 +49,20 @@ public class Planet {
     @Override
     public String toString() {
         jedis.sort(Comparator.comparing(Jedi::getJediRank).thenComparing(Jedi::getName));
-        String line = "=".repeat(20);
+        String line = "=".repeat(30);
         final StringBuilder sb = new StringBuilder();
         sb.append("\nPlanet name: ").append(name).append("\n");
         sb.append(line);
         sb.append("\nJedi List: ");
         for (Jedi jedi : jedis) {
-            sb.append("\n\nName: ").append(jedi.getName());
+            String line1 = "-".repeat(30);
+            sb.append('\n').append(line1);
+            sb.append("\nName: ").append(jedi.getName());
             sb.append("\nRank: ").append(jedi.getJediRank());
             sb.append("\nAge: ").append(jedi.getAge());
             sb.append("\nLight saber colour: ").append(jedi.getLightsaberColour());
             sb.append("\nStrength: ").append(jedi.getStrength());
+            sb.append('\n').append(line1);
         }
         return sb.toString();
     }

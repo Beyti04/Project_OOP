@@ -9,7 +9,7 @@ public class AddPlanet implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException {
-        if (args.length == 2){
+        if (args.length == 2) {
             String planetName = args[1];
 
             if (PlanetsList.getPlanetsInstance().getPlanet(planetName) == null) {

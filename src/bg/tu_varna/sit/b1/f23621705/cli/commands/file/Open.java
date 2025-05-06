@@ -39,7 +39,7 @@ public class Open implements Command {
             List<Jedi> jedis = FileManager.readFile(filePath);
 
             for (Jedi jedi : jedis) {
-                if(PlanetsList.getPlanetsInstance().getPlanet(jedi.getPlanet())==null){
+                if (PlanetsList.getPlanetsInstance().getPlanet(jedi.getPlanet()) == null) {
                     PlanetsList.getPlanetsInstance().createPlanet(new Planet(jedi.getPlanet()));
                 }
                 jediManager.createJedi(jedi);

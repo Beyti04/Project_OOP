@@ -27,7 +27,7 @@ public class GetYoungestJedi implements Command {
 
         if (PlanetsList.getPlanetsInstance().getPlanet(planet) != null) {
             String rank = args[2].toUpperCase();
-            if (rank.isBlank() || ranks.stream().noneMatch(rank1 -> rank1.name().equals(rank))) {
+            if (rank.isBlank() || jediManager.getYoungestJedi(planet, ranks.stream().filter(rank1 -> rank1.name().equals(rank)).findFirst().get()) == null) {
                 throw new IOException("There is no jedi with the rank of " + rank + " on the planet " + planet);
             } else {
                 System.out.println(jediManager.getYoungestJedi(planet, ranks.stream().filter(rank1 -> rank1.name().equals(rank)).findFirst().get()));

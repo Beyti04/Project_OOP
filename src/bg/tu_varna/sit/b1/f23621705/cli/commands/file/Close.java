@@ -11,14 +11,14 @@ public class Close implements Command {
     private final FileStatus fileStatus;
     private final FileSupplier fileSupplier;
 
-    public Close(JediManager jediManager,FileStatus fileStatus, FileSupplier fileSupplier) {
-        this.jediManager=jediManager;
+    public Close(JediManager jediManager, FileStatus fileStatus, FileSupplier fileSupplier) {
+        this.jediManager = jediManager;
         this.fileStatus = fileStatus;
         this.fileSupplier = fileSupplier;
     }
 
     @Override
-    public void execute(String[] args) throws CommandException{
+    public void execute(String[] args) throws CommandException {
         String currentFile = fileSupplier.get();
         String fileName = currentFile.split("/")[currentFile.split("/").length - 1];
         fileStatus.SetCurrentFile(null);
