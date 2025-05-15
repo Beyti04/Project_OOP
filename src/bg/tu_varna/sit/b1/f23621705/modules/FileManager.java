@@ -16,25 +16,35 @@ public class FileManager {
      * @throws Exception
      */
     public static List<Jedi> readFile(String filePath) throws Exception {
+
         File file = new File(filePath);
-        final PlanetsList planetsList = PlanetsList.getPlanetsInstance();
+        final Universe universe = Universe.getUniverseInstance();
 
         List<Jedi> jedis = new ArrayList<>();
 
         if (!file.exists()) {
+
             throw new FileNotFoundException("File not found: " + filePath);
+
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+
             String fileLine = null;
 
             while ((fileLine = reader.readLine()) != null) {
+
                 String[] parts = fileLine.trim().split("\\|");
+
                 if (parts.length == 6) {
-                    if (planetsList.getPlanet(parts[0]) == null) {
-                        planetsList.createPlanet(new Planet(parts[0]));
+
+                    if (universe.getPlanet(parts[0]) == null) {
+
+                        universe.createPlanet(new Planet(parts[0]));
+
                     }
-                    Planet planet = planetsList.getPlanet(parts[0]);
+
+                    Planet planet = universe.getPlanet(parts[0]);
                     String name = parts[1];
                     JediRank rank = JediRank.getRank(parts[2]);
                     int age = Integer.parseInt(parts[3]);
@@ -42,11 +52,15 @@ public class FileManager {
                     double strength = Double.parseDouble(parts[5]);
                     Jedi jedi = new Jedi(planet, name, rank, age, colour, strength);
                     jedis.add(jedi);
+
                 }
+
             }
 
         }
+
         return jedis;
+
     }
 
     /**
@@ -57,20 +71,28 @@ public class FileManager {
      * @throws Exception
      */
     public static void saveToFile(String filePath, List<Jedi> jedis) throws Exception {
+
         File file = new File(filePath);
-        final PlanetsList planetsList=PlanetsList.getPlanetsInstance();
+        final Universe universe = Universe.getUniverseInstance();
 
         if (!file.exists()) {
+
             file.createNewFile();
+
         } else {
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                for(Planet planet: planetsList.getPlanets()){
+
+                for(Planet planet: universe.getPlanets()){
+
                     String line=planet.getName();
                     writer.write(line);
                     writer.newLine();
+
                 }
 
                 for (Jedi jedi : jedis) {
+
                     String line = jedi.getPlanet().getName() +
                             "|" + jedi.getName() +
                             "|" + jedi.getJediRank() +
@@ -80,8 +102,13 @@ public class FileManager {
 
                     writer.write(line);
                     writer.newLine();
+
                 }
+
             }
+
         }
+
     }
+
 }

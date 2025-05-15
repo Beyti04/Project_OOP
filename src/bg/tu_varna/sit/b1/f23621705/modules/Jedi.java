@@ -59,7 +59,10 @@ public class Jedi {
         return planet;
     }
 
-
+    /**
+     * Функция за извеждане на данните на един джедай
+     * @return връща обект от тип String
+     */
     @Override
     public String toString() {
         String line = "=".repeat(30);

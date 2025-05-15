@@ -20,8 +20,11 @@ public class Close implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException {
+
         if(args.length!= Commands.CLOSE.getI()){
+
             throw new CommandException("Usage: close");
+
         }
 
         String currentFile = fileSupplier.get();
@@ -29,5 +32,6 @@ public class Close implements Command {
         fileStatus.SetCurrentFile(null);
         System.out.println("Successfully closed file " + fileName);
         jediManager.removeAll();
+
     }
 }

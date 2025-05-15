@@ -6,6 +6,7 @@ public class Help implements Command {
 
     @Override
     public void execute(String[] args) {
+
         System.out.println("The following commands are supported: ");
         System.out.println("add_planet <planet_name>                             - adds new planet");
         System.out.println("create_jedi                                          - adds new jedi");
@@ -24,5 +25,6 @@ public class Help implements Command {
         System.out.println("saveas <file>                                        - saves to selected file");
         System.out.println("help                                                 - opens help menu");
         System.out.println("exit                                                 - exits program");
+
     }
 }

@@ -24,6 +24,7 @@ public class CLI {
     FileSupplier fileSupplier = this::getCurrentFile;
 
     public CLI() {
+
         commands.put(Commands.ADD_PLANET, new AddPlanet());
         commands.put(Commands.CREATE_JEDI, new CreateJedi(jediManager));
         commands.put(Commands.REMOVE_JEDI, new RemoveJedi(jediManager));
@@ -39,37 +40,58 @@ public class CLI {
         commands.put(Commands.SAVE, new Save(jediManager, fileSupplier));
         commands.put(Commands.SAVE_AS, new SaveAs(jediManager, fileStatus));
         commands.put(Commands.EXIT, new Exit());
+
     }
 
     public void run() {
+
         System.out.println("Welcome to the Star Wars universe! \nType 'help' for a list of the commands.");
+
         while (true) {
+
             System.out.print("> ");
             String input = scanner.nextLine();
 
             String[] args = input.trim().split(" ");
+
             if (args.length == 0) {
+
                 continue;
+
             }
+
             String commandName = args[0];
 
             if (fileSupplier.get() == null && !commandName.equals("open") && !commandName.equals("help") && !commandName.equals("exit")) {
+
                 System.out.println("No file is currently open! Please open a file first.");
                 continue;
+
             }
 
             if(Commands.exists(commandName)){
+
                 Command command = commands.get(Commands.valueOf(commandName.toUpperCase()));
+
                 try {
+
                     command.execute(args);
+
                 } catch (Exception e) {
+
                     System.err.println(e.getMessage());
+
                 }
+
             }else{
+
                 System.out.println("Unknown command: " + commandName +
                         "\nType 'help' for a list of the commands.");
+
             }
+
         }
+
     }
 
     private String getCurrentFile() {
@@ -79,4 +101,5 @@ public class CLI {
     private void setCurrentFile(String file) {
         this.openedFile = file;
     }
+
 }

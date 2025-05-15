@@ -21,24 +21,34 @@ public class Save implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException {
+
         if(args.length!= Commands.SAVE.getI()){
+
             throw new CommandException("Usage: save\nIf you want to save to a new file use: save_as <file>");
+
         }
 
         String currentFile = fileSupplier.get();
         String filename = currentFile.split("/")[currentFile.split("/").length - 1];
 
         if (filename == null || filename.isBlank()) {
+
             throw new CommandException("No file is currently opened!");
+
         }
 
         try {
+
             List<Jedi> jedis = jediManager.getJedis();
             FileManager.saveToFile(currentFile, jedis);
 
             System.out.println("Successfully saved " + filename);
+
         } catch (Exception e) {
+
             throw new CommandException("Failed to save: " + e.getMessage());
+
         }
     }
+
 }

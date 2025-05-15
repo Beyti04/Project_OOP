@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Open implements Command {
     private final JediManager jediManager;
-    private final PlanetsList planetsList=PlanetsList.getPlanetsInstance();
+    private final Universe universe = Universe.getUniverseInstance();
     private final FileStatus fileStatus;
 
     public Open(JediManager jediManager, FileStatus fileStatus) {
@@ -22,34 +22,52 @@ public class Open implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException, IOException {
+
         if (args.length != Commands.OPEN.getI()) {
+
             throw new CommandException("Usage: open <filename>");
+
         }
 
         String filePath = args[1];
+
         if (!filePath.endsWith(".txt")) {
+
             throw new CommandException("Invalid file format. Please use file with .txt format!");
+
         }
 
         String filename = args[1].split("/")[args[1].split("/").length - 1];
         File file = new File(filePath);
 
         if (!file.exists()) {
+
             file.createNewFile();
+
         }
         try {
+
             List<Jedi> jedis = FileManager.readFile(filePath);
 
             for (Jedi jedi : jedis) {
-                if (planetsList.getPlanet(jedi.getPlanet().getName()) == null) {
-                    planetsList.createPlanet(jedi.getPlanet());
+
+                if (universe.getPlanet(jedi.getPlanet().getName()) == null) {
+
+                    universe.createPlanet(jedi.getPlanet());
+
                 }
+
                 jediManager.createJedi(jedi);
             }
+
             fileStatus.SetCurrentFile(filePath);
             System.out.println("Successfully opened file:" + filename);
+
         } catch (Exception e) {
+
             throw new CommandException("Failed to open file: " + e.getMessage());
+
         }
+
     }
 }

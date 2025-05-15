@@ -3,12 +3,19 @@ package bg.tu_varna.sit.b1.f23621705.enums;
 public enum LightsaberColour {
     PURPLE, RED, YELLOW, BLUE, GREEN, WHITE, BLACK, ORANGE;
 
-    public static boolean exists(String input){
+    public static LightsaberColour getColour(String input){
+
         try{
-            LightsaberColour.valueOf(input.toUpperCase());
-            return true;
+
+            return LightsaberColour.valueOf(input.toUpperCase());
+
+
         }catch (IllegalArgumentException e){
-            return false;
+
+            return null;
+
         }
+
     }
+
 }
