@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.b1.f23621705.cli.commands.file;
 
+import bg.tu_varna.sit.b1.f23621705.enums.Commands;
 import bg.tu_varna.sit.b1.f23621705.exceptions.CommandException;
 import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
 import bg.tu_varna.sit.b1.f23621705.interfaces.FileSupplier;
@@ -20,6 +21,10 @@ public class Save implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException {
+        if(args.length!= Commands.SAVE.getI()){
+            throw new CommandException("Usage: save\nIf you want to save to a new file use: save_as <file>");
+        }
+
         String currentFile = fileSupplier.get();
         String filename = currentFile.split("/")[currentFile.split("/").length - 1];
 

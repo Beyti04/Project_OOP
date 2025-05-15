@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.b1.f23621705.cli.commands.file;
 
+import bg.tu_varna.sit.b1.f23621705.enums.Commands;
 import bg.tu_varna.sit.b1.f23621705.exceptions.CommandException;
 import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
 import bg.tu_varna.sit.b1.f23621705.interfaces.FileStatus;
@@ -20,7 +21,7 @@ public class SaveAs implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException {
-        if (args.length != 2) {
+        if (args.length != Commands.SAVE_AS.getI()) {
             throw new IllegalArgumentException("Usage: save_as <file>");
         }
 

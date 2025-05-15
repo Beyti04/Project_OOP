@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.b1.f23621705.cli.commands.file;
 
+import bg.tu_varna.sit.b1.f23621705.enums.Commands;
 import bg.tu_varna.sit.b1.f23621705.exceptions.CommandException;
 import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
 import bg.tu_varna.sit.b1.f23621705.interfaces.FileStatus;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class Open implements Command {
     private final JediManager jediManager;
+    private final PlanetsList planetsList=PlanetsList.getPlanetsInstance();
     private final FileStatus fileStatus;
 
     public Open(JediManager jediManager, FileStatus fileStatus) {
@@ -20,7 +22,7 @@ public class Open implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException, IOException {
-        if (args.length != 2) {
+        if (args.length != Commands.OPEN.getI()) {
             throw new CommandException("Usage: open <filename>");
         }
 
@@ -39,8 +41,8 @@ public class Open implements Command {
             List<Jedi> jedis = FileManager.readFile(filePath);
 
             for (Jedi jedi : jedis) {
-                if (PlanetsList.getPlanetsInstance().getPlanet(jedi.getPlanet()) == null) {
-                    PlanetsList.getPlanetsInstance().createPlanet(new Planet(jedi.getPlanet()));
+                if (planetsList.getPlanet(jedi.getPlanet().getName()) == null) {
+                    planetsList.createPlanet(jedi.getPlanet());
                 }
                 jediManager.createJedi(jedi);
             }

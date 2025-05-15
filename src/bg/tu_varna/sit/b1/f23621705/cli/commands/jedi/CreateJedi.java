@@ -1,7 +1,9 @@
 package bg.tu_varna.sit.b1.f23621705.cli.commands.jedi;
 
+import bg.tu_varna.sit.b1.f23621705.enums.Commands;
 import bg.tu_varna.sit.b1.f23621705.enums.JediRank;
 import bg.tu_varna.sit.b1.f23621705.enums.LightsaberColour;
+import bg.tu_varna.sit.b1.f23621705.exceptions.CommandException;
 import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
 import bg.tu_varna.sit.b1.f23621705.modules.Jedi;
 import bg.tu_varna.sit.b1.f23621705.modules.JediManager;
@@ -14,133 +16,53 @@ import java.util.Scanner;
 
 public class CreateJedi implements Command {
     private final JediManager jediManager;
-    private final Scanner scanner;
+    private final PlanetsList planetsList=PlanetsList.getPlanetsInstance();
 
     private final double MAX_STRENGTH = 2;
     private final double MIN_STRENGTH = 1;
 
-    private final List<JediRank> ranks = List.of(JediRank.values());
-    private final List<LightsaberColour> colours = List.of(LightsaberColour.values());
-
-
-    public CreateJedi(JediManager jediManager, Scanner scanner) {
+    public CreateJedi(JediManager jediManager) {
         this.jediManager = jediManager;
-        this.scanner = scanner;
     }
 
     @Override
-    public void execute(String[] args) throws IOException {
-        boolean flag;
+    public void execute(String[] args) throws IOException, CommandException {
+        if(args.length!= Commands.CREATE_JEDI.getI()){
+            throw new CommandException("Usage: create_jedi <planet> <jedi_first_name> <jedi_last_name> <rank> <age> <saber_colour> <strength>");
+        }
 
-        String input;
-        String planet = null;
-        String name = null;
-        JediRank rank = null;
-        int age = 0;
-        LightsaberColour lightsaberColour = null;
-        double strength = 0;
+        String planet = args[1];
+        String name = args[2]+" "+args[3];
+        String rank = args[4];
+        String age = args[5];
+        String lightsaberColour = args[6];
+        String strength = args[7];
 
-        String line = "=".repeat(30);
-        System.out.println(line);
+        if(planet.isBlank()||planetsList.getPlanet(planet)==null){
+            throw new IOException("Please enter valid data for planet!");
+        }
 
-        System.out.println("Planet: ");
-        do {
-            flag = true;
-            input = scanner.nextLine();
+        if(name.isBlank()||jediManager.getJedi(name)!=null){
+            throw new IOException("Please enter valid data for the jedis name!");
+        }
 
-            if (input.isBlank()) {
-                System.out.println("Please enter valid data for planet!");
-            } else if (PlanetsList.getPlanetsInstance().getPlanet(input) == null) {
-                String temp = input;
-                System.out.println("There is no planet with this name!");
-                System.out.println("Do you want to create a planet with this name?  Y/N    YES/NO");
-                input = scanner.nextLine();
-                if (input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("YES")) {
-                    PlanetsList.getPlanetsInstance().createPlanet(new Planet(temp));
-                    planet = temp;
-                    flag = false;
-                } else {
-                    throw new IOException("There should be valid data for planet!");
-                }
-            } else {
-                planet = input;
-                flag = false;
-            }
-        } while (flag);
+        if(rank.isBlank()||!JediRank.exists(rank)){
+            throw new IOException("Please enter valid data for rank!");
+        }
 
-        System.out.println("Name: ");
-        do {
-            flag = true;
-            input = scanner.nextLine();
+        if (age.isBlank() || !age.matches("\\d+") || age.equals("0")){
+            throw new IOException("Please enter valid data for age!");
+        }
 
-            if (input.isBlank()) {
-                System.out.println("Please enter valid data for the name!");
-            } else {
-                if (jediManager.getJedi(input) == null) {
-                    name = input;
-                    flag = false;
-                } else {
-                    throw new IOException("There is already a jedi with the name " + input);
-                }
-            }
-        } while (flag);
+        if(lightsaberColour.isBlank()||!LightsaberColour.exists(lightsaberColour)){
+            throw new IOException("Please enter valid data for saber colour!");
+        }
 
-        System.out.println("Rank: ");
-        do {
-            flag = true;
-            input = scanner.nextLine().toUpperCase();
-            String finalInput = input;
+        if(strength.isBlank()||!strength.matches("([0-9]*[.])?[0-9]+")||Double.parseDouble(strength)<MIN_STRENGTH||Double.parseDouble(strength)>MAX_STRENGTH){
+            throw new IOException("Please enter valid data for strength!");
+        }
 
-            if (input.isBlank() || ranks.stream().noneMatch(rank1 -> rank1.name().equals(finalInput))) {
-                System.out.println("Please enter valid data for rank!");
-            } else {
-                rank = ranks.stream().filter(rank1 -> rank1.name().equals(finalInput)).findFirst().get();
-                flag = false;
-            }
-        } while (flag);
-
-        System.out.println("Age: ");
-        do {
-            flag = true;
-            input = scanner.nextLine();
-
-            if (input.isBlank() || !input.matches("\\d+") || input.equals("0")) {
-                System.out.println("Please enter valid data for age!");
-            } else {
-                age = Integer.parseInt(input);
-                flag = false;
-            }
-        } while (flag);
-
-        System.out.println("Light saber colour: ");
-        do {
-            flag = true;
-            input = scanner.nextLine().toUpperCase();
-
-            String finalInput = input;
-            if (input.isBlank() || colours.stream().noneMatch(colour1 -> colour1.name().equals(finalInput))) {
-                System.out.println("Please enter valid data for a light saber colour!");
-            } else {
-                lightsaberColour = colours.stream().filter(colour1 -> colour1.name().equals(finalInput)).findFirst().get();
-                flag = false;
-            }
-        } while (flag);
-
-        System.out.println("Strength: ");
-        do {
-            flag = true;
-            input = scanner.nextLine();
-
-            if (input.isBlank() || input.matches("\\d+") || Double.parseDouble(input) < MIN_STRENGTH || Double.parseDouble(input) > MAX_STRENGTH) {
-                System.out.println("Please enter valid data for strength!");
-            } else {
-                strength = Double.parseDouble(input);
-                flag = false;
-            }
-        } while (flag);
-
-        System.out.println(line);
-
-        jediManager.createJedi(new Jedi(planet, name, rank, age, lightsaberColour, strength));
+        Jedi jedi=new Jedi(planetsList.getPlanet(planet),name,JediRank.valueOf(rank),Integer.parseInt(age),LightsaberColour.valueOf(lightsaberColour),Double.parseDouble(strength));
+        jediManager.createJedi(jedi);
     }
 }

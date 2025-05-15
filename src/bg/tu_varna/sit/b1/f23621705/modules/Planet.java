@@ -46,6 +46,10 @@ public class Planet {
         return null;
     }
 
+    public void removeJedi(String name){
+        jedis.remove(getJedi(name));
+    }
+
     @Override
     public String toString() {
         jedis.sort(Comparator.comparing(Jedi::getJediRank).thenComparing(Jedi::getName));
@@ -58,7 +62,7 @@ public class Planet {
             String line1 = "-".repeat(30);
             sb.append('\n').append(line1);
             sb.append("\nName: ").append(jedi.getName());
-            sb.append("\nRank: ").append(jedi.getJediRank());
+            sb.append("\nRank: ").append(jedi.getJediRank().name().replace("_"," "));
             sb.append("\nAge: ").append(jedi.getAge());
             sb.append("\nLight saber colour: ").append(jedi.getLightsaberColour());
             sb.append("\nStrength: ").append(jedi.getStrength());

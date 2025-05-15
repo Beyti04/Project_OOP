@@ -11,6 +11,8 @@ public class JediManager implements JediCreator, JediRemover {
     private final double MAX_STRENGTH = 2;
     private final double MIN_STRENGTH = 1;
 
+    private final PlanetsList planetsList = PlanetsList.getPlanetsInstance();
+
     /**
      * Създава нов джедай в двата и ги записва в съответните списъци
      *
@@ -18,11 +20,10 @@ public class JediManager implements JediCreator, JediRemover {
      */
     @Override
     public void createJedi(Jedi jedi) {
-        if (JediList.getJedisInstance().getJedi(jedi.getName()) == null && PlanetsList.getPlanetsInstance().getPlanet(jedi.getPlanet()).getJedi(jedi.getName()) == null) {
-            JediList.getJedisInstance().createJedi(jedi);
-            PlanetsList.getPlanetsInstance().getPlanet(jedi.getPlanet()).createJedi(jedi);
+        if (getJedi(jedi.getName()) == null) {
+            planetsList.getPlanet(jedi.getPlanet().getName()).createJedi(jedi);
         } else {
-            System.out.println("Jedi already exists!");
+            System.out.println("Jedi already exists! ");
         }
     }
 
@@ -34,8 +35,7 @@ public class JediManager implements JediCreator, JediRemover {
      */
     @Override
     public void removeJedi(String name, String planetName) {
-        PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().remove(JediList.getJedisInstance().getJedi(name));
-        JediList.getJedisInstance().getJedis().remove(JediList.getJedisInstance().getJedi(name));
+        planetsList.getPlanet(planetName).removeJedi(name);
     }
 
     /**
@@ -45,15 +45,24 @@ public class JediManager implements JediCreator, JediRemover {
      * @return Връща обект от типа Jedi ако съществува
      */
     public Jedi getJedi(String name) {
-        if (JediList.getJedisInstance().getJedi(name) != null && PlanetsList.getPlanetsInstance().getJedi(name) != null) {
-            return JediList.getJedisInstance().getJedi(name);
+        if (planetsList.getJedi(name) != null) {
+            return planetsList.getJedi(name);
         } else {
             return null;
         }
     }
 
+    /**
+     * Взема всички джедаи и ги добавя в списък
+     *
+     * @return връща списък с елементи от тип Jedi
+     */
     public List<Jedi> getJedis() {
-        return JediList.getJedisInstance().getJedis();
+        List<Jedi> jedis = new ArrayList<>();
+        for (Planet planet : planetsList.getPlanets()) {
+            jedis.addAll(planet.getJedis());
+        }
+        return jedis;
     }
 
     /**
@@ -63,24 +72,16 @@ public class JediManager implements JediCreator, JediRemover {
      * @param multiplier множител за увеличаване на силата
      */
     public void promoteJedi(String name, Double multiplier) {
-        JediRank[] ranks = JediRank.values();
-        int current = JediList.getJedisInstance().getJedi(name).getJediRank().ordinal();
+        getJedi(name).setJediRank(getJedi(name).getJediRank().next());
 
-        JediList.getJedisInstance().getJedi(name).setJediRank(ranks[current + 1]);
-        PlanetsList.getPlanetsInstance().getJedi(name).setJediRank(ranks[current + 1]);
-
-        double strength = JediList.getJedisInstance().getJedi(name).getStrength();
+        double strength = getJedi(name).getStrength();
 
         strength += (multiplier * strength);
-        if (strength <= 2) {
-            JediList.getJedisInstance().getJedi(name).setStrength(strength);
-            PlanetsList.getPlanetsInstance().getJedi(name).setStrength(strength);
+        if (strength <= MAX_STRENGTH) {
+            getJedi(name).setStrength(strength);
         } else {
-            JediList.getJedisInstance().getJedi(name).setStrength(MAX_STRENGTH);
-            PlanetsList.getPlanetsInstance().getJedi(name).setStrength(MAX_STRENGTH);
+            getJedi(name).setStrength(MAX_STRENGTH);
         }
-
-
     }
 
     /**
@@ -90,19 +91,15 @@ public class JediManager implements JediCreator, JediRemover {
      * @param multiplier множител за намаляване на силата
      */
     public void demoteJedi(String name, Double multiplier) {
-        JediRank[] ranks = JediRank.values();
-        int current = JediList.getJedisInstance().getJedi(name).getJediRank().ordinal();
-        JediList.getJedisInstance().getJedi(name).setJediRank(ranks[current - 1]);
-        PlanetsList.getPlanetsInstance().getJedi(name).setJediRank(ranks[current - 1]);
+        getJedi(name).setJediRank(getJedi(name).getJediRank().prev());
 
-        double strength = JediList.getJedisInstance().getJedi(name).getStrength();
-        strength -= multiplier * strength;
-        if (strength > MIN_STRENGTH) {
-            JediList.getJedisInstance().getJedi(name).setStrength(strength);
-            PlanetsList.getPlanetsInstance().getJedi(name).setStrength(strength);
+        double strength = getJedi(name).getStrength();
+
+        strength -= (multiplier * strength);
+        if (strength <= MIN_STRENGTH) {
+            getJedi(name).setStrength(strength);
         } else {
-            JediList.getJedisInstance().getJedi(name).setStrength(MIN_STRENGTH);
-            PlanetsList.getPlanetsInstance().getJedi(name).setStrength(MIN_STRENGTH);
+            getJedi(name).setStrength(MIN_STRENGTH);
         }
     }
 
@@ -113,9 +110,10 @@ public class JediManager implements JediCreator, JediRemover {
      * @return Връща най-силния джедай от планетата ако има джедаи на планетата
      */
     public Jedi getStrongestJedi(String planetName) {
-        if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis() != null) {
-            List<Jedi> jedis = PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis();
+        if (planetsList.getPlanet(planetName).getJedis() != null) {
+            List<Jedi> jedis = planetsList.getPlanet(planetName).getJedis();
             Jedi currentStrongest = jedis.getFirst();
+
             for (Jedi jedi : jedis) {
                 if (currentStrongest.getStrength() < jedi.getStrength()) {
                     currentStrongest = jedi;
@@ -135,9 +133,9 @@ public class JediManager implements JediCreator, JediRemover {
      * @return Връща най-младия джедай от планетата
      */
     public Jedi getYoungestJedi(String planetName, JediRank rank) {
-        if (PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
+        if (planetsList.getPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
             List<Jedi> jedis = new ArrayList<>();
-            for (Jedi jedi : PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis()) {
+            for (Jedi jedi : planetsList.getPlanet(planetName).getJedis()) {
                 if (jedi.getJediRank().equals(rank)) {
                     jedis.add(jedi);
                 }
@@ -155,21 +153,22 @@ public class JediManager implements JediCreator, JediRemover {
      * @return Връща обект от типа LightsaberColour
      */
     public LightsaberColour mostUsedLightSaberColour(String planetName) {
-        List<Jedi> jedis = PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis();
-        Set<LightsaberColour> colours = new HashSet<>();
+        List<Jedi> jedis = planetsList.getPlanet(planetName).getJedis();
+        Set<LightsaberColour> ValidColours = new HashSet<>();
         List<Jedi> allowedJedis = new ArrayList<>();
         Map<LightsaberColour, Integer> counter = new HashMap<>();
+
         LightsaberColour mostUsed = null;
         int maxCount = 0;
 
         for (Jedi jedi : jedis) {
             if (jedi.getJediRank().equals(JediRank.GRAND_MASTER)) {
-                colours.add(jedi.getLightsaberColour());
+                ValidColours.add(jedi.getLightsaberColour());
             }
         }
 
         for (Jedi jedi : jedis) {
-            if (colours.contains(jedi.getLightsaberColour())) {
+            if (ValidColours.contains(jedi.getLightsaberColour())) {
                 allowedJedis.add(jedi);
             }
         }
@@ -199,7 +198,7 @@ public class JediManager implements JediCreator, JediRemover {
         List<Jedi> jedis = new ArrayList<>();
         LightsaberColour mostUsed = null;
         int maxCount = 0;
-        for (Jedi jedi : PlanetsList.getPlanetsInstance().getPlanet(planetName).getJedis()) {
+        for (Jedi jedi : planetsList.getPlanet(planetName).getJedis()) {
             if (jedi.getJediRank().equals(rank)) {
                 jedis.add(jedi);
             }
@@ -227,8 +226,7 @@ public class JediManager implements JediCreator, JediRemover {
      * @return Връща обект от типа String
      */
     public String printByPlanetName(String planetName) {
-        Planet planet = PlanetsList.getPlanetsInstance().getPlanet(planetName);
-        return planet.toString();
+        return planetsList.getPlanet(planetName).toString();
     }
 
     /**
@@ -249,17 +247,13 @@ public class JediManager implements JediCreator, JediRemover {
      * @return Връща онект от типа String
      */
     public String printByJediName(String name) {
-
-        Jedi jedi = JediList.getJedisInstance().getJedi(name);
-        return jedi.toString();
-
+        return getJedi(name).toString();
     }
 
     /**
      * Премахва всички данни
      */
     public void removeAll() {
-        JediList.getJedisInstance().removeAll();
-        PlanetsList.getPlanetsInstance().removeAll();
+        planetsList.removeAll();
     }
 }

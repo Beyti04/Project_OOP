@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.b1.f23621705.cli.commands.jedi;
 
-import bg.tu_varna.sit.b1.f23621705.enums.JediRank;
+import bg.tu_varna.sit.b1.f23621705.enums.Commands;
 import bg.tu_varna.sit.b1.f23621705.exceptions.CommandException;
 import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
 import bg.tu_varna.sit.b1.f23621705.modules.JediManager;
@@ -17,15 +17,15 @@ public class PromoteJedi implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException, IOException {
-        if (args.length != 3) {
-            throw new CommandException("Usage: promote_jedi <jedi_name> <multiplier>");
+        if (args.length != Commands.PROMOTE_JEDI.getI()) {
+            throw new CommandException("Usage: promote_jedi <jedi_first_name> <jedi_last_name> <multiplier>");
         }
 
-        String name = args[1];
+        String name = args[1]+" "+args[2];
 
         if (jediManager.getJedi(name) != null) {
-            if (jediManager.getJedi(name).getJediRank() != JediRank.GRAND_MASTER) {
-                String multiplier = args[2];
+            if (jediManager.getJedi(name).getJediRank().next()!=null) {
+                String multiplier = args[3];
                 if (multiplier.isBlank() || !multiplier.matches("([0-9]*[.])?[0-9]+")) {
                     throw new IOException("There must be valid data for the multiplier!");
                 } else {

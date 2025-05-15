@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.b1.f23621705.cli.commands.jedi;
 
+import bg.tu_varna.sit.b1.f23621705.enums.Commands;
 import bg.tu_varna.sit.b1.f23621705.enums.JediRank;
 import bg.tu_varna.sit.b1.f23621705.exceptions.CommandException;
 import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
@@ -11,8 +12,7 @@ import java.util.List;
 
 public class GetYoungestJedi implements Command {
     private final JediManager jediManager;
-
-    List<JediRank> ranks = List.of(JediRank.values());
+    private final PlanetsList planetsList=PlanetsList.getPlanetsInstance();
 
     public GetYoungestJedi(JediManager jediManager) {
         this.jediManager = jediManager;
@@ -20,17 +20,17 @@ public class GetYoungestJedi implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException, IOException {
-        if (args.length != 3) {
+        if (args.length != Commands.GET_YOUNGEST_JEDI.getI()) {
             throw new CommandException("Usage: get_youngest_jedi <planet_name> <jedi_rank>");
         }
         String planet = args[1];
 
-        if (PlanetsList.getPlanetsInstance().getPlanet(planet) != null) {
+        if (planetsList.getPlanet(planet) != null) {
             String rank = args[2].toUpperCase();
-            if (rank.isBlank() || jediManager.getYoungestJedi(planet, ranks.stream().filter(rank1 -> rank1.name().equals(rank)).findFirst().get()) == null) {
+            if (rank.isBlank() || jediManager.getYoungestJedi(planet, JediRank.valueOf(rank)) == null) {
                 throw new IOException("There is no jedi with the rank of " + rank + " on the planet " + planet);
             } else {
-                System.out.println(jediManager.getYoungestJedi(planet, ranks.stream().filter(rank1 -> rank1.name().equals(rank)).findFirst().get()));
+                System.out.println(jediManager.getYoungestJedi(planet, JediRank.valueOf(rank)));
             }
         } else {
             throw new IOException("There is no planet with the name " + planet);

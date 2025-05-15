@@ -1,150 +1,168 @@
-Alderaan|Jen_Vos|GRAND_MASTER|512|RED|1.93
-Alderaan|Ael_Vos|PADAWAN|44|RED|1.34
-Alderaan|Dar_Voss|MASTER|403|PURPLE|1.9
-Alderaan|Cen_Jinn|PADAWAN|547|GREEN|1.62
-Alderaan|Hal_Ken|MASTER|882|BLUE|1.97
-Alderaan|Bar_Vos|BATTLE_MASTER|875|BLUE|1.45
-Alderaan|Ian_Ken|KNIGHT|809|YELLOW|1.21
-Alderaan|Hal_Vos|GRAND_MASTER|286|RED|1.6
-Alderaan|Elo_Vos|KNIGHT_ASPIRANT|810|RED|1.81
-Chandrila|Bar_Rex|MASTER|231|BLACK|1.48
-Chandrila|Bar_Voss|YOUNGLING|131|PURPLE|1.53
-Chandrila|Dar_Ken|INITIATE|380|PURPLE|1.12
-Chandrila|Lyra_Skyfrost|BATTLE_MASTER|824|RED|1.61
-Chandrila|Dar_Vos|BATTLE_MASTER|261|BLUE|1.4
-Concord_Dawn|Ahsoka_Tano|BATTLE_MASTER|17|BLUE|1.11
-Concord_Dawn|Ben_Solo|GRAND_MASTER|510|BLUE|1.6
-Concord_Dawn|Rey_Skywalker|INITIATE|687|BLACK|1.01
-Concord_Dawn|Dar_Tal|GRAND_MASTER|555|BLUE|1.95
-Concord_Dawn|Fay_Voss|INITIATE|231|ORANGE|1.89
-Concord_Dawn|Xelith_Kavorn|KNIGHT_ASPIRANT|529|GREEN|1.28
-Concord_Dawn|Aveline_Sarnath|BATTLE_MASTER|264|PURPLE|1.47
-Concord_Dawn|Gon_Ken|YOUNGLING|472|YELLOW|1.5
-Concord_Dawn|Fay_Rex|PADAWAN|671|BLACK|1.4
-Concord_Dawn|Ael_Voss|GRAND_MASTER|249|WHITE|1.81
-Concord_Dawn|Elo_Ty|YOUNGLING|880|GREEN|1.29
-Concord_Dawn|Hal_Jinn|MASTER|753|YELLOW|1.3
-Concord_Dawn|Elo_Tane|PADAWAN|156|BLUE|1.28
-Corellia|Ian_Rex|KNIGHT_ASPIRANT|853|WHITE|1.48
-Corellia|Gon_Rex|MASTER|674|RED|1.03
-Corellia|Ael_Marr|MASTER|373|RED|1.58
-Corellia|Kaleb_Thunderstrike|INITIATE|628|BLACK|1.99
-Corellia|Elo_Jinn|INITIATE|339|RED|1.76
-Coruscant|Anakin_Skywalker|PADAWAN|329|WHITE|1.52
-Coruscant|Count_Dooku|INITIATE|281|RED|1.55
-Coruscant|Gon_Jinn|GRAND_MASTER|33|PURPLE|1.67
-Coruscant|Cen_Tal|KNIGHT|412|GREEN|1.09
-Coruscant|Kaden_Starflare|GRAND_MASTER|122|BLUE|1.9
-Coruscant|Bar_Jinn|PADAWAN|317|BLUE|1.76
-Coruscant|Serifa_Vossar|KNIGHT|74|YELLOW|1.97
-Dagobah|Yoda|GRAND_MASTER|584|PURPLE|1.64
-Dathomir|Selene_Mirok|KNIGHT_ASPIRANT|212|RED|1.38
-Dathomir|Gon_Ty|KNIGHT_ASPIRANT|117|RED|1.65
-Dathomir|Cen_Ty|KNIGHT_ASPIRANT|655|BLACK|1.37
-Dathomir|Jen_Rex|GRAND_MASTER|486|PURPLE|1.08
-Dathomir|Selene_Sunspear|KNIGHT_ASPIRANT|878|PURPLE|1.26
-Dathomir|Gon_Tal|GRAND_MASTER|417|RED|1.32
-Dathomir|Ael_Rex|BATTLE_MASTER|418|BLUE|1.2
-Dathomir|Ian_Tal|KNIGHT|337|BLUE|1.44
-Dorin|Mace_Windu|KNIGHT_ASPIRANT|633|PURPLE|1.64
-Dorin|Fay_Ken|PADAWAN|241|BLUE|1.96
-Dorin|Ael_Jinn|YOUNGLING|197|BLACK|1.59
-Dorin|Cen_Voss|INITIATE|408|BLUE|1.62
-Dorin|Hal_Korr|PADAWAN|444|ORANGE|1.83
-Dorin|Selani_Vortex|GRAND_MASTER|21|GREEN|1.6
-Dorin|Avalynn_Fierroth|KNIGHT|720|PURPLE|1.4
-Haruun_Kal|Leia_Organa|INITIATE|894|YELLOW|1.75
-Haruun_Kal|Tesk_Kaelan|GRAND_MASTER|577|BLACK|1.45
-Haruun_Kal|Serina_Vetiri|YOUNGLING|668|WHITE|1.15
-Haruun_Kal|Ael_Tane|INITIATE|290|GREEN|1.01
-Haruun_Kal|Bar_Ken|KNIGHT|880|YELLOW|1.2
-Haruun_Kal|Ael_Tal|YOUNGLING|270|BLUE|1.34
-Haruun_Kal|Thessa_Vortek|INITIATE|713|WHITE|1.96
-Haruun_Kal|Elo_Voss|KNIGHT_ASPIRANT|123|RED|1.15
-Haruun_Kal|Xandor_Elyssia|YOUNGLING|300|RED|1.94
-Jakku|Ezra_Bridger|KNIGHT|837|BLACK|1.0
-Jakku|Plo_Koon|PADAWAN|337|RED|1.85
-Jakku|Elo_Rex|YOUNGLING|471|WHITE|1.67
-Jakku|Bar_Tal|BATTLE_MASTER|65|RED|1.16
-Jakku|Tahlis_Varak|BATTLE_MASTER|684|PURPLE|1.3
-Jakku|Gon_Voss|KNIGHT|734|GREEN|1.4
-Jakku|Cen_Korr|GRAND_MASTER|688|BLUE|1.03
-Jakku|Bar_Tane|PADAWAN|153|BLUE|1.93
-Jakku|Jaxon_Windrazor|BATTLE_MASTER|772|YELLOW|1.03
-Kamino|Qui-Gon_Jinn|INITIATE|178|RED|1.93
-Kamino|Fay_Vos|KNIGHT_ASPIRANT|443|RED|1.63
-Kamino|Jen_Ty|INITIATE|647|BLACK|1.34
-Kamino|Elo_Marr|MASTER|801|PURPLE|1.4
-Kamino|Hal_Ty|MASTER|793|PURPLE|1.45
-Lothal|Vexa_Thorne|MASTER|511|RED|1.81
-Lothal|Elara_Jyn|YOUNGLING|770|BLUE|1.1
-Lothal|Fay_Tane|YOUNGLING|353|BLUE|1.74
-Lothal|Thalos_Sunwalker|MASTER|744|PURPLE|1.57
-Lothal|Jelon_Dravith|GRAND_MASTER|222|BLUE|1.22
-Lothal|Varian_Stormrider|PADAWAN|799|BLACK|1.64
-Lothal|Jen_Ken|GRAND_MASTER|57|BLUE|1.45
-Lothal|Fay_Tal|KNIGHT_ASPIRANT|681|ORANGE|1.33
-Lothal|Cen_Rex|KNIGHT_ASPIRANT|734|GREEN|1.71
-Lothal|Dar_Tane|BATTLE_MASTER|121|PURPLE|1.77
-Mygeeto|Lira_Vosha|INITIATE|26|YELLOW|1.27
-Mygeeto|Jen_Korr|YOUNGLING|670|BLACK|1.46
-Mygeeto|Vortan_Kallara|GRAND_MASTER|879|WHITE|1.78
-Mygeeto|Elo_Ken|PADAWAN|809|GREEN|1.49
-Mygeeto|Ariana_Starfall|PADAWAN|302|YELLOW|1.69
-Mygeeto|Joden_Talriq|PADAWAN|422|BLUE|1.14
-Mygeeto|Cen_Tane|GRAND_MASTER|149|WHITE|1.15
-Mygeeto|Ren_Shadowleap|KNIGHT_ASPIRANT|656|RED|1.86
-Naboo|Mira_Jenthai|INITIATE|15|RED|1.87
-Naboo|Vaelan_Nuliq|MASTER|705|BLACK|1.59
-Naboo|Ian_Tane|KNIGHT_ASPIRANT|172|RED|1.63
-Naboo|Kaelith_Serin|YOUNGLING|136|WHITE|1.08
-Naboo|Ian_Marr|KNIGHT_ASPIRANT|746|RED|1.61
-Naboo|Gon_Marr|PADAWAN|736|PURPLE|1.01
-Naboo|Ian_Korr|PADAWAN|749|GREEN|1.99
-Naboo|Aelara_Nysun|KNIGHT|381|BLUE|1.42
-Serenno|Cen_Vos|KNIGHT_ASPIRANT|588|BLUE|1.07
-Serenno|Jorak_Kethan|PADAWAN|629|YELLOW|1.75
-Serenno|Zarik_Dalvian|PADAWAN|523|RED|1.5
-Serenno|Aelyx_Tormar|INITIATE|223|RED|1.0
-Serenno|Zylan_Drayan|YOUNGLING|167|BLACK|1.74
-Serenno|Kaden_Windwhisper|PADAWAN|124|PURPLE|1.74
-Serenno|Jyren_Solari|KNIGHT_ASPIRANT|387|PURPLE|1.73
-Serenno|Tharius_Stormweaver|MASTER|514|RED|1.03
-Serenno|Vexis_Mirok|YOUNGLING|118|BLUE|1.87
-Serenno|Velan_Quoros|BATTLE_MASTER|261|BLUE|1.26
-Serenno|Gon_Korr|BATTLE_MASTER|769|PURPLE|1.72
-Serenno|Hal_Marr|MASTER|435|BLUE|1.65
-Serenno|Seraphina_Kyraa|INITIATE|196|BLACK|1.96
-Serenno|Kyra_Solanth|PADAWAN|18|BLUE|1.97
-Shili|Jorun_Dalan|YOUNGLING|449|ORANGE|1.89
-Shili|Thalren_Izari|BATTLE_MASTER|147|GREEN|1.75
-Shili|Elo_Korr|GRAND_MASTER|40|PURPLE|1.63
-Shili|Bar_Korr|KNIGHT|289|YELLOW|1.94
-Shili|Renthis_Corvax|BATTLE_MASTER|710|BLACK|1.77
-Shili|Elyndra_Voshu|BATTLE_MASTER|348|WHITE|1.3
-Shili|Zephyr_Valon|MASTER|421|GREEN|1.7
-Shili|Nyren_Korda|KNIGHT_ASPIRANT|772|YELLOW|1.62
-Shili|Hal_Rex|KNIGHT|884|BLUE|1.49
-Shili|Dar_Ty|INITIATE|669|WHITE|1.3
-Stewjon|Astra_Starfury|KNIGHT_ASPIRANT|244|RED|1.54
-Stewjon|Dar_Jinn|GRAND_MASTER|621|RED|1.45
-Stewjon|Larek_Kyndar|MASTER|468|BLACK|1.04
-Stewjon|Sylas_Jendara|INITIATE|841|RED|1.21
-Stewjon|Thalia_Starwisp|KNIGHT|654|WHITE|1.15
-Tatooine|Luke_Skywalker|KNIGHT|325|RED|1.63
-Tatooine|Ki-Adi_Mundi|KNIGHT_ASPIRANT|61|PURPLE|1.68
-Tatooine|Keth_Jorun|KNIGHT_ASPIRANT|752|GREEN|1.95
-Tatooine|Nox_Talvyn|KNIGHT_ASPIRANT|343|BLUE|1.78
-Tatooine|Ael_Ken|BATTLE_MASTER|544|BLUE|1.25
-Tatooine|Kaelara_Quinn|KNIGHT_ASPIRANT|642|YELLOW|1.94
-Tatooine|Jaxon_Trevune|KNIGHT_ASPIRANT|268|RED|1.15
-Tatooine|Hal_Tal|KNIGHT|874|BLUE|1.9
-Tatooine|Ael_Korr|INITIATE|828|GREEN|1.69
-Tatooine|Varen_Nightwing|YOUNGLING|163|BLACK|1.69
-Stewjon|Obi-Wan_Kenobi|YOUNGLING|579|WHITE|1.79
-Tatooine|Ian_Voss|PADAWAN|63|PURPLE|1.02
-Shili|Yulian_Kael|INITIATE|681|RED|1.58
-Lothal|Jaxori_Vennar|KNIGHT|65|ORANGE|1.02
-Haruun_Kal|Jynara Soltan|BATTLE_MASTER|482|YELLOW|1.93
-Dathomir|Talon_Grendor|INITIATE|212|BLACK|1.29
-Alderaan|Lyra_Montague|BATTLE_MASTER|416|RED|1.86
+Alderaan
+Chandrila
+Concord
+Corellia
+Coruscant
+Dagobah
+Dathomir
+Dorin
+Haruun Kal
+Jakku
+Kamino
+Lothal
+Mygeeto
+Naboo
+Serenno
+Shili
+Stewjon
+Tatooine
+Alderaan|Jen Vos|GRAND_MASTER|512|RED|1.93
+Alderaan|Ael Vos|PADAWAN|44|RED|1.34
+Alderaan|Dar Voss|MASTER|403|PURPLE|1.9
+Alderaan|Cen Jinn|PADAWAN|547|GREEN|1.62
+Alderaan|Hal Ken|MASTER|882|BLUE|1.97
+Alderaan|Bar Vos|BATTLE_MASTER|875|BLUE|1.45
+Alderaan|Ian Ken|KNIGHT|809|YELLOW|1.21
+Alderaan|Hal Vos|GRAND_MASTER|286|RED|1.6
+Alderaan|Elo Vos|KNIGHT_ASPIRANT|810|RED|1.81
+Alderaan|Lyra Montague|BATTLE_MASTER|416|RED|1.86
+Chandrila|Bar Rex|MASTER|231|BLACK|1.48
+Chandrila|Bar Voss|YOUNGLING|131|PURPLE|1.53
+Chandrila|Dar Ken|INITIATE|380|PURPLE|1.12
+Chandrila|Lyra Skyfrost|BATTLE_MASTER|824|RED|1.61
+Chandrila|Dar Vos|BATTLE_MASTER|261|BLUE|1.4
+Concord|Ahsoka Tano|BATTLE_MASTER|17|BLUE|1.11
+Concord|Ben Solo|GRAND_MASTER|510|BLUE|1.6
+Concord|Rey Skywalker|INITIATE|687|BLACK|1.01
+Concord|Dar Tal|GRAND_MASTER|555|BLUE|1.95
+Concord|Fay Voss|INITIATE|231|ORANGE|1.89
+Concord|Xelith Kavorn|KNIGHT_ASPIRANT|529|GREEN|1.28
+Concord|Aveline Sarnath|BATTLE_MASTER|264|PURPLE|1.47
+Concord|Gon Ken|YOUNGLING|472|YELLOW|1.5
+Concord|Fay Rex|PADAWAN|671|BLACK|1.4
+Concord|Ael Voss|GRAND_MASTER|249|WHITE|1.81
+Concord|Elo Ty|YOUNGLING|880|GREEN|1.29
+Concord|Hal Jinn|MASTER|753|YELLOW|1.3
+Concord|Elo Tane|PADAWAN|156|BLUE|1.28
+Corellia|Ian Rex|KNIGHT_ASPIRANT|853|WHITE|1.48
+Corellia|Gon Rex|MASTER|674|RED|1.03
+Corellia|Ael Marr|MASTER|373|RED|1.58
+Corellia|Kaleb Thunderstrike|INITIATE|628|BLACK|1.99
+Corellia|Elo Jinn|INITIATE|339|RED|1.76
+Coruscant|Anakin Skywalker|PADAWAN|329|WHITE|1.52
+Coruscant|Count Dooku|INITIATE|281|RED|1.55
+Coruscant|Gon Jinn|GRAND_MASTER|33|PURPLE|1.67
+Coruscant|Cen Tal|KNIGHT|412|GREEN|1.09
+Coruscant|Kaden Starflare|GRAND_MASTER|122|BLUE|1.9
+Coruscant|Bar Jinn|PADAWAN|317|BLUE|1.76
+Coruscant|Serifa Vossar|KNIGHT|74|YELLOW|1.97
+Dagobah|Master Yoda|GRAND_MASTER|584|PURPLE|1.64
+Dathomir|Selene Mirok|KNIGHT_ASPIRANT|212|RED|1.38
+Dathomir|Gon Ty|KNIGHT_ASPIRANT|117|RED|1.65
+Dathomir|Cen Ty|KNIGHT_ASPIRANT|655|BLACK|1.37
+Dathomir|Jen Rex|GRAND_MASTER|486|PURPLE|1.08
+Dathomir|Selene Sunspear|KNIGHT_ASPIRANT|878|PURPLE|1.26
+Dathomir|Gon Tal|GRAND_MASTER|417|RED|1.32
+Dathomir|Ael Rex|BATTLE_MASTER|418|BLUE|1.2
+Dathomir|Ian Tal|KNIGHT|337|BLUE|1.44
+Dathomir|Talon Grendor|INITIATE|212|BLACK|1.29
+Dorin|Mace Windu|KNIGHT_ASPIRANT|633|PURPLE|1.64
+Dorin|Fay Ken|PADAWAN|241|BLUE|1.96
+Dorin|Ael Jinn|YOUNGLING|197|BLACK|1.59
+Dorin|Cen Voss|INITIATE|408|BLUE|1.62
+Dorin|Hal Korr|PADAWAN|444|ORANGE|1.83
+Dorin|Selani Vortex|GRAND_MASTER|21|GREEN|1.6
+Dorin|Avalynn Fierroth|KNIGHT|720|PURPLE|1.4
+Haruun Kal|Leia Organa|INITIATE|894|YELLOW|1.75
+Haruun Kal|Tesk Kaelan|GRAND_MASTER|577|BLACK|1.45
+Haruun Kal|Serina Vetiri|YOUNGLING|668|WHITE|1.15
+Haruun Kal|Ael Tane|INITIATE|290|GREEN|1.01
+Haruun Kal|Bar Ken|KNIGHT|880|YELLOW|1.2
+Haruun Kal|Ael Tal|YOUNGLING|270|BLUE|1.34
+Haruun Kal|Thessa Vortek|INITIATE|713|WHITE|1.96
+Haruun Kal|Elo Voss|KNIGHT_ASPIRANT|123|RED|1.15
+Haruun Kal|Xandor Elyssia|YOUNGLING|300|RED|1.94
+Haruun Kal|Jynara Soltan|BATTLE_MASTER|482|YELLOW|1.93
+Jakku|Ezra Bridger|KNIGHT|837|BLACK|1.0
+Jakku|Plo Koon|PADAWAN|337|RED|1.85
+Jakku|Elo Rex|YOUNGLING|471|WHITE|1.67
+Jakku|Bar Tal|BATTLE_MASTER|65|RED|1.16
+Jakku|Tahlis Varak|BATTLE_MASTER|684|PURPLE|1.3
+Jakku|Gon Voss|KNIGHT|734|GREEN|1.4
+Jakku|Cen Korr|GRAND_MASTER|688|BLUE|1.03
+Jakku|Bar Tane|PADAWAN|153|BLUE|1.93
+Jakku|Jaxon Windrazor|BATTLE_MASTER|772|YELLOW|1.03
+Kamino|Qui-Gon Jinn|INITIATE|178|RED|1.93
+Kamino|Fay Vos|KNIGHT_ASPIRANT|443|RED|1.63
+Kamino|Jen Ty|INITIATE|647|BLACK|1.34
+Kamino|Elo Marr|MASTER|801|PURPLE|1.4
+Kamino|Hal Ty|MASTER|793|PURPLE|1.45
+Lothal|Vexa Thorne|MASTER|511|RED|1.81
+Lothal|Elara Jyn|YOUNGLING|770|BLUE|1.1
+Lothal|Fay Tane|YOUNGLING|353|BLUE|1.74
+Lothal|Thalos Sunwalker|MASTER|744|PURPLE|1.57
+Lothal|Jelon Dravith|GRAND_MASTER|222|BLUE|1.22
+Lothal|Varian Stormrider|PADAWAN|799|BLACK|1.64
+Lothal|Jen Ken|GRAND_MASTER|57|BLUE|1.45
+Lothal|Fay Tal|KNIGHT_ASPIRANT|681|ORANGE|1.33
+Lothal|Cen Rex|KNIGHT_ASPIRANT|734|GREEN|1.71
+Lothal|Dar Tane|BATTLE_MASTER|121|PURPLE|1.77
+Lothal|Jaxori Vennar|KNIGHT|65|ORANGE|1.02
+Mygeeto|Lira Vosha|INITIATE|26|YELLOW|1.27
+Mygeeto|Jen Korr|YOUNGLING|670|BLACK|1.46
+Mygeeto|Vortan Kallara|GRAND_MASTER|879|WHITE|1.78
+Mygeeto|Elo Ken|PADAWAN|809|GREEN|1.49
+Mygeeto|Ariana Starfall|PADAWAN|302|YELLOW|1.69
+Mygeeto|Joden Talriq|PADAWAN|422|BLUE|1.14
+Mygeeto|Cen Tane|GRAND_MASTER|149|WHITE|1.15
+Mygeeto|Ren Shadowleap|KNIGHT_ASPIRANT|656|RED|1.86
+Naboo|Mira Jenthai|INITIATE|15|RED|1.87
+Naboo|Vaelan Nuliq|MASTER|705|BLACK|1.59
+Naboo|Ian Tane|KNIGHT_ASPIRANT|172|RED|1.63
+Naboo|Kaelith Serin|YOUNGLING|136|WHITE|1.08
+Naboo|Ian Marr|KNIGHT_ASPIRANT|746|RED|1.61
+Naboo|Gon Marr|PADAWAN|736|PURPLE|1.01
+Naboo|Ian Korr|PADAWAN|749|GREEN|1.99
+Naboo|Aelara Nysun|KNIGHT|381|BLUE|1.42
+Serenno|Cen Vos|KNIGHT_ASPIRANT|588|BLUE|1.07
+Serenno|Jorak Kethan|PADAWAN|629|YELLOW|1.75
+Serenno|Zarik Dalvian|PADAWAN|523|RED|1.5
+Serenno|Aelyx Tormar|INITIATE|223|RED|1.0
+Serenno|Zylan Drayan|YOUNGLING|167|BLACK|1.74
+Serenno|Kaden Windwhisper|PADAWAN|124|PURPLE|1.74
+Serenno|Jyren Solari|KNIGHT_ASPIRANT|387|PURPLE|1.73
+Serenno|Tharius Stormweaver|MASTER|514|RED|1.03
+Serenno|Vexis Mirok|YOUNGLING|118|BLUE|1.87
+Serenno|Velan Quoros|BATTLE_MASTER|261|BLUE|1.26
+Serenno|Gon Korr|BATTLE_MASTER|769|PURPLE|1.72
+Serenno|Hal Marr|MASTER|435|BLUE|1.65
+Serenno|Seraphina Kyraa|INITIATE|196|BLACK|1.96
+Serenno|Kyra Solanth|PADAWAN|18|BLUE|1.97
+Shili|Jorun Dalan|YOUNGLING|449|ORANGE|1.89
+Shili|Thalren Izari|BATTLE_MASTER|147|GREEN|1.75
+Shili|Elo Korr|GRAND_MASTER|40|PURPLE|1.63
+Shili|Bar Korr|KNIGHT|289|YELLOW|1.94
+Shili|Renthis Corvax|BATTLE_MASTER|710|BLACK|1.77
+Shili|Elyndra Voshu|BATTLE_MASTER|348|WHITE|1.3
+Shili|Zephyr Valon|MASTER|421|GREEN|1.7
+Shili|Nyren Korda|KNIGHT_ASPIRANT|772|YELLOW|1.62
+Shili|Hal Rex|KNIGHT|884|BLUE|1.49
+Shili|Dar Ty|INITIATE|669|WHITE|1.3
+Shili|Yulian Kael|INITIATE|681|RED|1.58
+Stewjon|Astra Starfury|KNIGHT_ASPIRANT|244|RED|1.54
+Stewjon|Dar Jinn|GRAND_MASTER|621|RED|1.45
+Stewjon|Larek Kyndar|MASTER|468|BLACK|1.04
+Stewjon|Sylas Jendara|INITIATE|841|RED|1.21
+Stewjon|Thalia Starwisp|KNIGHT|654|WHITE|1.15
+Stewjon|Obi-Wan Kenobi|YOUNGLING|579|WHITE|1.79
+Tatooine|Luke Skywalker|KNIGHT|325|RED|1.63
+Tatooine|Ki-Adi Mundi|KNIGHT_ASPIRANT|61|PURPLE|1.68
+Tatooine|Keth Jorun|KNIGHT_ASPIRANT|752|GREEN|1.95
+Tatooine|Nox Talvyn|KNIGHT_ASPIRANT|343|BLUE|1.78
+Tatooine|Ael Ken|BATTLE_MASTER|544|BLUE|1.25
+Tatooine|Kaelara Quinn|KNIGHT_ASPIRANT|642|YELLOW|1.94
+Tatooine|Jaxon Trevune|KNIGHT_ASPIRANT|268|RED|1.15
+Tatooine|Hal Tal|KNIGHT|874|BLUE|1.9
+Tatooine|Ael Korr|INITIATE|828|GREEN|1.69
+Tatooine|Varen Nightwing|YOUNGLING|163|BLACK|1.69
+Tatooine|Ian Voss|PADAWAN|63|PURPLE|1.02
