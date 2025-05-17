@@ -7,6 +7,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класът FileManager предоставя функционалност за четене и запис на данни за джедаи от и във файлове.
+ * Взаимодейства с единичната инстанция на Universe, за да управлява и актуализира планетите
+ * и техните обитатели джедаи въз основа на данните, съдържащи се във файла.
+ */
 public class FileManager {
     /**
      * Чете данни от файл
@@ -79,31 +84,29 @@ public class FileManager {
 
             file.createNewFile();
 
-        } else {
+        }
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 
-                for(Planet planet: universe.getPlanets()){
+            for (Planet planet : universe.getPlanets()) {
 
-                    String line=planet.getName();
-                    writer.write(line);
-                    writer.newLine();
+                String line = planet.getName();
+                writer.write(line);
+                writer.newLine();
 
-                }
+            }
 
-                for (Jedi jedi : jedis) {
+            for (Jedi jedi : jedis) {
 
-                    String line = jedi.getPlanet().getName() +
-                            "|" + jedi.getName() +
-                            "|" + jedi.getJediRank() +
-                            "|" + jedi.getAge() +
-                            "|" + jedi.getLightsaberColour() +
-                            "|" + jedi.getStrength();
+                String line = jedi.getPlanet().getName() +
+                        "|" + jedi.getName() +
+                        "|" + jedi.getJediRank() +
+                        "|" + jedi.getAge() +
+                        "|" + jedi.getLightsaberColour() +
+                        "|" + jedi.getStrength();
 
-                    writer.write(line);
-                    writer.newLine();
-
-                }
+                writer.write(line);
+                writer.newLine();
 
             }
 

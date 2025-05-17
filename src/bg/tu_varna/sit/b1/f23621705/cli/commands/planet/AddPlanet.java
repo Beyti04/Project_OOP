@@ -6,11 +6,18 @@ import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
 import bg.tu_varna.sit.b1.f23621705.modules.Planet;
 import bg.tu_varna.sit.b1.f23621705.modules.Universe;
 
+import java.io.IOException;
+
+/**
+ * Класът AddPlanet имплементира интерфейса Command и е отговорен 
+ * за добавяне на нова планета към Universe. Проверява дали планетата вече 
+ * съществува във Universe и се справя със създаването или обработката на изключения съответно.
+ */
 public class AddPlanet implements Command {
     private final Universe universe = Universe.getUniverseInstance();
 
     @Override
-    public void execute(String[] args) throws CommandException {
+    public void execute(String[] args) throws CommandException, IOException {
 
         if (args.length != Commands.ADD_PLANET.getI()) {
 
@@ -23,10 +30,11 @@ public class AddPlanet implements Command {
         if (planet == null) {
 
             universe.createPlanet(new Planet(args[1]));
+            System.out.println("Planet " + args[1] + " has been added to the universe!");
 
         } else {
 
-            System.out.println("Planet with the name " + args[1] + " already exists!");
+            throw new IOException("Planet with the name " + args[1] + " already exists!");
 
         }
 

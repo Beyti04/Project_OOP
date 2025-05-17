@@ -2,6 +2,12 @@ package bg.tu_varna.sit.b1.f23621705.cli.commands.file;
 
 import bg.tu_varna.sit.b1.f23621705.interfaces.Command;
 
+/**
+ * Help класът предоставя функционалност за показване на списък с наличните команди
+ * и техните описания в системата. Той имплементира Command интерфейса
+ * и служи като справочник за потребителите да разберат използването на различните
+ * команди, поддържани от приложението.
+ */
 public class Help implements Command {
 
     @Override

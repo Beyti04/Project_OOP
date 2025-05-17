@@ -10,6 +10,10 @@ import bg.tu_varna.sit.b1.f23621705.modules.Universe;
 
 import java.io.IOException;
 
+/**
+ * GetYoungestJedi класът отговаря за намирането на най-младия Джедай от определен ранг
+ * на дадена планета. Той имплементира Command интерфейса за изпълнение на операцията.
+ */
 public class GetYoungestJedi implements Command {
     private final JediManager jediManager;
     private final Universe universe = Universe.getUniverseInstance();

@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ *
+ */
 public class Open implements Command {
     private final JediManager jediManager;
     private final Universe universe = Universe.getUniverseInstance();

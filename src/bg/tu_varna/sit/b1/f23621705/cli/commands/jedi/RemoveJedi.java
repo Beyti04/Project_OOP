@@ -9,6 +9,12 @@ import bg.tu_varna.sit.b1.f23621705.modules.Universe;
 
 import java.io.IOException;
 
+/**
+ * RemoveJedi класът е имплементация на команда, която премахва Джедай от определена планета.
+ * Той взаимодейства с JediManager и Universe за локализиране и премахване на посочения Джедай.
+ * Ако посоченият Джедай или планета не съществуват, или ако аргументите са невалидни,
+ * се хвърлят съответните изключения.
+ */
 public class RemoveJedi implements Command {
     private final JediManager jediManager;
     private final Universe universe = Universe.getUniverseInstance();
@@ -35,11 +41,11 @@ public class RemoveJedi implements Command {
             if (planet.getJedi(name) != null) {
 
                 jediManager.removeJedi(name, args[3]);
-                System.out.println("Jedi " + name + " has been removed from planet " + planet);
+                System.out.println("Jedi " + name + " has been removed from planet " + args[3]);
 
             } else {
 
-                throw new IOException("There is no jedi with the name: " + name + " on planet: " + planet);
+                throw new IOException("There is no jedi with the name: " + name + " on planet: " + args[3]);
 
             }
         } else {

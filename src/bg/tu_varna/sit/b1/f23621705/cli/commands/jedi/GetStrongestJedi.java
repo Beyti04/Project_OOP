@@ -9,7 +9,12 @@ import bg.tu_varna.sit.b1.f23621705.modules.Universe;
 
 import java.io.IOException;
 
-
+/**
+ * GetStrongestJedi класът имплементира Command интерфейса за изпълнение
+ * на специфична команда за намиране на най-силния Джедай на дадена планета.
+ * Взаимодейства с JediManager и Universe класовете за извличане
+ * и обработка на необходимите данни.
+ */
 public class GetStrongestJedi implements Command {
     private final JediManager jediManager;
     private final Universe universe = Universe.getUniverseInstance();

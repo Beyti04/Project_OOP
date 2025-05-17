@@ -4,21 +4,23 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Класът Planet представлява планета във вселена. Планетата има име 
+ * и може да приюти списък с джедаи. Предоставя функционалност за управление 
+ * на пребиваващите джедаи, включително добавяне, извличане или премахване на джедай, 
+ * както и показване на цялата свързана информация за джедаите във форматиран вид.
+ */
 public class Planet {
     private final List<Jedi> jedis;
     private String name;
 
     public Planet(String name) {
-        this.setName(name);
+        this.name=name;
         this.jedis = new ArrayList<>();
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public List<Jedi> getJedis() {

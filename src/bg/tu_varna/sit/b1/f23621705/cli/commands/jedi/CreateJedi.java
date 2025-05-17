@@ -12,6 +12,13 @@ import bg.tu_varna.sit.b1.f23621705.modules.Universe;
 
 import java.io.IOException;
 
+/**
+ * CreateJedi класът е имплементация на командата за създаване на нов Джедай субект 
+ * в системата. Той валидира подадените входни данни, като се уверява че всички 
+ * необходими параметри са коректни, след което създава и регистрира новия Джедай.
+ * Командата също взаимодейства с Universe инстанцията за да извлече 
+ * посочената планета за Джедая.
+ */
 public class CreateJedi implements Command {
     private final JediManager jediManager;
     private final Universe universe = Universe.getUniverseInstance();
@@ -56,9 +63,13 @@ public class CreateJedi implements Command {
 
             }
 
-            if (name.isBlank() || jediManager.getJedi(name) != null) {
+            if (name.isBlank()) {
 
                 throw new IOException("Please enter valid data for the jedis name!");
+
+            } else if (jediManager.getJedi(name)!=null) {
+
+                throw new IOException("There is already a jedi with the name: " + name);
 
             }
 
@@ -88,6 +99,7 @@ public class CreateJedi implements Command {
             }
 
             jediManager.createJedi(new Jedi(planet, name, rank, Integer.parseInt(age), lightsaberColour, Double.parseDouble(strength)));
+            System.out.println("Jedi " + name + " has been created successfully!");
 
         } else {
 

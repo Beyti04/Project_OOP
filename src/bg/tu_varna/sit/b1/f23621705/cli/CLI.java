@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Класът CLI отговаря за обработката на потребителския вход и изпълнението на съответните команди.
+ */
 public class CLI {
     private final JediManager jediManager = new JediManager();
     private final Scanner scanner = new Scanner(System.in);
@@ -61,6 +64,10 @@ public class CLI {
             }
 
             String commandName = args[0];
+            
+            if(commandName.equals("-")){
+                
+            }
 
             if (fileSupplier.get() == null && !commandName.equals("open") && !commandName.equals("help") && !commandName.equals("exit")) {
 

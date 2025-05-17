@@ -5,6 +5,12 @@ import bg.tu_varna.sit.b1.f23621705.interfaces.PlanetCreator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класът Universe имплементира шаблона за дизайн singleton и служи като
+ * контейнер за управление на планети и достъп до свързаните с тях обекти от тип Jedi.
+ * Предоставя функционалност за създаване, извличане и управление на планети, както
+ * и за намиране на конкретни джедаи в множество планети.
+ */
 public class Universe implements PlanetCreator {
     private static Universe planetsInstance;
     private final List<Planet> planets;

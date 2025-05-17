@@ -10,6 +10,11 @@ import bg.tu_varna.sit.b1.f23621705.modules.JediManager;
 
 import java.util.List;
 
+/**
+ * Представлява командата SaveAs, която записва колекция от обекти тип Jedi в
+ * определен път до файл. Тази команда проверява предоставения път до файла, осигурява
+ * правилния формат на файла, записва данните и обновява текущия статус на файла.
+ */
 public class SaveAs implements Command {
     private final JediManager jediManager;
     private final FileStatus fileStatus;
@@ -46,9 +51,21 @@ public class SaveAs implements Command {
 
             }
 
+            int dotIndex=filePath.lastIndexOf('.');
+
+            if(dotIndex>0 && dotIndex<filePath.length()-1){
+                String extension=filePath.substring(dotIndex);
+                if(extension!=null && !extension.equals(".txt")){
+                    throw new IllegalArgumentException("Invalid file format. Please use file with .txt format!");
+                }
+            }else{
+                filePath+=".txt";
+            }
+
+
             FileManager.saveToFile(filePath, jedis);
             fileStatus.SetCurrentFile(filePath);
-            String filename = args[1].split("/")[args[1].split("/").length - 1];
+            String filename = filePath.split("/")[filePath.split("/").length - 1];
             System.out.println("Successfully saved " + filename);
 
         } catch (Exception e) {

@@ -10,6 +10,16 @@ import bg.tu_varna.sit.b1.f23621705.modules.Universe;
 
 import java.io.IOException;
 
+/**
+ * Представлява команда за извличане на най-използвания цвят на светлинен меч на определена планета
+ * или от джедаи с определен ранг на тази планета. Информацията за цвета на светлинния меч се
+ * извлича чрез JediManager инстанцията, свързана с тази команда.
+ *
+ * Тази команда валидира входните аргументи, за да осигури правилна употреба и проверява
+ * съществуването на посочената планета и ранг на джедай преди изпълнение на операцията.
+ * Ако не е предоставен ранг, проверява за джедаи с ранг GRAND_MASTER.
+ * Изключения се хвърлят при невалидни входни данни или ако условията за извличане не са изпълнени.
+ */
 public class GetMostUsedLightsaberColour implements Command {
     private final JediManager jediManager;
     private final Universe universe = Universe.getUniverseInstance();
@@ -27,14 +37,12 @@ public class GetMostUsedLightsaberColour implements Command {
 
             if (planet != null) {
 
-                JediRank rank;
-
                 if (args.length == Commands.GET_MOST_USED_SABER_COLOUR.getI()) {
 
                     if (planet.getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(JediRank.GRAND_MASTER))) {
 
                         System.out.println("The most used light saber colour on the planet " + args[1] +
-                                " is " + jediManager.mostUsedLightSaberColour(args[1]));
+                                " is " + jediManager.mostUsedLightSaberColour(args[1],null));
 
                     } else {
 
@@ -43,6 +51,7 @@ public class GetMostUsedLightsaberColour implements Command {
                     }
 
                 } else {
+                    JediRank rank;
 
                     if (args.length==Commands.GET_MOST_USED_SABER_COLOUR.getJ()) {
 
@@ -60,8 +69,13 @@ public class GetMostUsedLightsaberColour implements Command {
 
                     }
 
-                    System.out.println("The most used light saber colour on the planet " + args[1] +
-                            "\nby the jedis with rank " + args[2].toUpperCase() + " is " + jediManager.mostUsedLightSaberColour(args[1], rank));
+                    if(planet.getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))){
+                        System.out.println("The most used light saber colour on the planet " + args[1] +
+                                "\nby the jedis with rank " + rank.name() + " is " + jediManager.mostUsedLightSaberColour(args[1], rank));
+                    }else{
+                        throw new IOException("There are no jedis with the rank " + rank.name() + " on the planet " + args[1]);
+                    }
+                    
                 }
 
             }else{

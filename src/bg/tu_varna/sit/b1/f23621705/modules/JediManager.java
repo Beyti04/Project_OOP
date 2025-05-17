@@ -7,6 +7,11 @@ import bg.tu_varna.sit.b1.f23621705.interfaces.JediRemover;
 
 import java.util.*;
 
+/**
+ * Класът JediManager отговаря за операциите свързани с джедаите, като създаване,
+ * премахване, повишаване, понижаване и извличане на информация за джедаите във Вселената.
+ * Имплементира интерфейсите JediCreator и JediRemover
+ */
 public class JediManager implements JediCreator, JediRemover {
     private final double MAX_STRENGTH = 2;
     private final double MIN_STRENGTH = 1;
@@ -88,18 +93,20 @@ public class JediManager implements JediCreator, JediRemover {
      */
     public void promoteJedi(String name, Double multiplier) {
 
-        getJedi(name).setJediRank(getJedi(name).getJediRank().next());
-        double strength = getJedi(name).getStrength();
+        Jedi jedi=getJedi(name);
+
+        jedi.setJediRank(jedi.getJediRank().next());
+        double strength = jedi.getStrength();
 
         strength += (multiplier * strength);
 
         if (strength <= MAX_STRENGTH) {
 
-            getJedi(name).setStrength(strength);
+            jedi.setStrength(strength);
 
         } else {
 
-            getJedi(name).setStrength(MAX_STRENGTH);
+            jedi.setStrength(MAX_STRENGTH);
 
         }
     }
@@ -112,18 +119,20 @@ public class JediManager implements JediCreator, JediRemover {
      */
     public void demoteJedi(String name, Double multiplier) {
 
-        getJedi(name).setJediRank(getJedi(name).getJediRank().prev());
-        double strength = getJedi(name).getStrength();
+        Jedi jedi=getJedi(name);
+
+        jedi.setJediRank(jedi.getJediRank().prev());
+        double strength = jedi.getStrength();
 
         strength -= (multiplier * strength);
 
-        if (strength <= MIN_STRENGTH) {
+        if (strength >= MIN_STRENGTH) {
 
-            getJedi(name).setStrength(strength);
+            jedi.setStrength(strength);
 
         } else {
 
-            getJedi(name).setStrength(MIN_STRENGTH);
+            jedi.setStrength(MIN_STRENGTH);
 
         }
     }
@@ -136,7 +145,7 @@ public class JediManager implements JediCreator, JediRemover {
      */
     public Jedi getStrongestJedi(String planetName) {
 
-        if (universe.getPlanet(planetName).getJedis() != null) {
+        if (!universe.getPlanet(planetName).getJedis().isEmpty()) {
 
             List<Jedi> jedis = universe.getPlanet(planetName).getJedis();
             Jedi currentStrongest = jedis.getFirst();
@@ -169,8 +178,6 @@ public class JediManager implements JediCreator, JediRemover {
      */
     public Jedi getYoungestJedi(String planetName, JediRank rank) {
 
-        if (universe.getPlanet(planetName).getJedis().stream().anyMatch(jedi1 -> jedi1.getJediRank().equals(rank))) {
-
             List<Jedi> jedis = new ArrayList<>();
 
             for (Jedi jedi : universe.getPlanet(planetName).getJedis()) {
@@ -183,13 +190,11 @@ public class JediManager implements JediCreator, JediRemover {
 
             }
 
+            if(jedis.isEmpty()){
+                return null;
+            }
+
             return Collections.min(jedis, Comparator.comparing(Jedi::getAge).thenComparing(Jedi::getName));
-
-        } else {
-
-            return null;
-
-        }
     }
 
     /**
@@ -198,94 +203,47 @@ public class JediManager implements JediCreator, JediRemover {
      * @param planetName име на планета
      * @return Връща обект от тип LightsaberColour
      */
-    public LightsaberColour mostUsedLightSaberColour(String planetName) {
-
+    public LightsaberColour mostUsedLightSaberColour(String planetName, JediRank filterRank) {
         List<Jedi> jedis = universe.getPlanet(planetName).getJedis();
-        Set<LightsaberColour> ValidColours = new HashSet<>();
+        Set<LightsaberColour> validColours = new HashSet<>();
         List<Jedi> allowedJedis = new ArrayList<>();
         Map<LightsaberColour, Integer> counter = new HashMap<>();
 
         LightsaberColour mostUsed = null;
         int maxCount = 0;
 
-        for (Jedi jedi : jedis) {
-
-            if (jedi.getJediRank().equals(JediRank.GRAND_MASTER)) {
-
-                ValidColours.add(jedi.getLightsaberColour());
-
+        if (filterRank == null) {
+            for (Jedi jedi : jedis) {
+                if (jedi.getJediRank().equals(JediRank.GRAND_MASTER)) {
+                    validColours.add(jedi.getLightsaberColour());
+                }
             }
         }
 
         for (Jedi jedi : jedis) {
+            boolean isAllowed;
 
-            if (ValidColours.contains(jedi.getLightsaberColour())) {
+            if (filterRank == null) {
+                isAllowed = validColours.contains(jedi.getLightsaberColour());
+            } else {
+                isAllowed = jedi.getJediRank().equals(filterRank);
+            }
 
+            if (isAllowed) {
                 allowedJedis.add(jedi);
-
             }
         }
 
         for (Jedi jedi : allowedJedis) {
-
-            counter.put(jedi.getLightsaberColour(), counter.getOrDefault(jedi.getLightsaberColour(), 0) + 1);
-
+            LightsaberColour colour = jedi.getLightsaberColour();
+            counter.put(colour, counter.getOrDefault(colour, 0) + 1);
         }
 
         for (Map.Entry<LightsaberColour, Integer> entry : counter.entrySet()) {
-
             if (entry.getValue() > maxCount) {
-
                 mostUsed = entry.getKey();
                 maxCount = entry.getValue();
-
             }
-
-        }
-
-        return mostUsed;
-    }
-
-    /**
-     * Взема най-използвания цвят за светлинен меч на планетата
-     *
-     * @param planetName име на планета
-     * @param rank       ранг на групата, от която ще се вземе най-използвания цвят
-     * @return Връща обект от типа LightsaberColour
-     */
-    public LightsaberColour mostUsedLightSaberColour(String planetName, JediRank rank) {
-
-        List<Jedi> jedis = new ArrayList<>();
-        LightsaberColour mostUsed = null;
-        int maxCount = 0;
-
-        for (Jedi jedi : universe.getPlanet(planetName).getJedis()) {
-
-            if (jedi.getJediRank().equals(rank)) {
-
-                jedis.add(jedi);
-
-            }
-
-        }
-
-        Map<LightsaberColour, Integer> counter = new HashMap<>();
-
-        for (Jedi jedi : jedis) {
-
-            counter.put(jedi.getLightsaberColour(), counter.getOrDefault(jedi.getLightsaberColour(), 0) + 1);
-
-        }
-
-        for (Map.Entry<LightsaberColour, Integer> entry : counter.entrySet()) {
-
-            if (entry.getValue() > maxCount) {
-
-                mostUsed = entry.getKey();
-                maxCount = entry.getValue();
-
-            }
-
         }
 
         return mostUsed;

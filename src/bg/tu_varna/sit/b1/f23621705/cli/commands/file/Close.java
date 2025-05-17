@@ -7,6 +7,11 @@ import bg.tu_varna.sit.b1.f23621705.interfaces.FileStatus;
 import bg.tu_varna.sit.b1.f23621705.interfaces.FileSupplier;
 import bg.tu_varna.sit.b1.f23621705.modules.JediManager;
 
+/**
+ * Close класът имплементира Command интерфейса и предоставя функционалност
+ * за обработка на затварянето на файл в системата. Също така извършва
+ * операции по почистване, премахвайки всички данни свързани със затворения файл.
+ */
 public class Close implements Command {
     private final JediManager jediManager;
     private final FileStatus fileStatus;

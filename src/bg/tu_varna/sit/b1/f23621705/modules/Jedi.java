@@ -3,7 +3,11 @@ package bg.tu_varna.sit.b1.f23621705.modules;
 import bg.tu_varna.sit.b1.f23621705.enums.JediRank;
 import bg.tu_varna.sit.b1.f23621705.enums.LightsaberColour;
 
-
+/**
+ * Класът Jedi представлява, воин със специални умения във вселената на Междузвездни войни.
+ * Всеки Джедай има атрибути като планета на произход, име, ранг, възраст, цвят на светлинния меч
+ * и ниво на сила. Предоставя функционалност за извличане и промяна на определени свойства.
+ */
 public class Jedi {
     private Planet planet;
     private String name;
@@ -27,16 +31,8 @@ public class Jedi {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public JediRank getJediRank() {
         return jediRank;
-    }
-
-    public void setJediRank(JediRank jediRank) {
-        this.jediRank = jediRank;
     }
 
     public int getAge() {
@@ -47,17 +43,23 @@ public class Jedi {
         return lightsaberColour;
     }
 
+    public Planet getPlanet() {
+        return planet;
+    }
+
     public double getStrength() {
         return strength;
+    }
+
+    public void setJediRank(JediRank jediRank) {
+        this.jediRank = jediRank;
     }
 
     public void setStrength(Double strength) {
         this.strength = strength;
     }
 
-    public Planet getPlanet() {
-        return planet;
-    }
+
 
     /**
      * Функция за извеждане на данните на един джедай
