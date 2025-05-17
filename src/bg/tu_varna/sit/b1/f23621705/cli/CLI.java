@@ -100,6 +100,72 @@ public class CLI {
         }
 
     }
+    
+    public void demo(){
+        try {
+            Command openCommand = commands.get(Commands.OPEN);
+            System.out.println(">"+Commands.OPEN.name()+" jedis.txt\n");
+
+            openCommand.execute(new String[]{"open", "jedis.txt"});
+            System.out.println();
+
+            Command addPlanetCommand = commands.get(Commands.ADD_PLANET);
+            System.out.println(">"+Commands.ADD_PLANET.name()+" TU\n");
+
+            addPlanetCommand.execute(new String[]{"add_planet", "TU"});
+
+            System.out.println();
+            Command createJediCommand = commands.get(Commands.CREATE_JEDI);
+            System.out.println(">"+Commands.CREATE_JEDI.name()+" TU, Jedi, Test, KNIGHT, 20, GREEN, 1.3\n");
+
+            createJediCommand.execute(new String[]{"create_jedi", "TU", "Jedi","Test", "KNIGHT","20", "GREEN",  "1.3"});
+
+            System.out.println(">"+Commands.CREATE_JEDI.name()+" TU, Demo, Jedi, GRAND_MASTER, 900, GREEN, 1.87\n");
+
+            createJediCommand.execute(new String[]{"create_jedi","TU", "Demo","Jedi", "GRAND_MASTER","900", "GREEN",  "1.87"});
+
+            System.out.println();
+            Command getStrongestJediCommand = commands.get(Commands.GET_STRONGEST_JEDI);
+            System.out.println(">"+Commands.GET_STRONGEST_JEDI.name()+" Alderaan");
+
+            getStrongestJediCommand.execute(new String[]{"get_strongest_jedi","Alderaan"});
+
+            Command getMostUsedLightsaberColourCommand = commands.get(Commands.GET_MOST_USED_SABER_COLOUR);
+            System.out.println(">"+Commands.GET_MOST_USED_SABER_COLOUR.name()+" Concord\n");
+
+            getMostUsedLightsaberColourCommand.execute(new String[]{"get_most_used_lightsaber_colour","Concord"});
+
+            System.out.println();
+            Command printCommand = commands.get(Commands.PRINT);
+            System.out.println(">"+Commands.PRINT.name()+" Jedi Test");
+
+            printCommand.execute(new String[]{"print","Jedi","Test"});
+
+            System.out.println(">"+Commands.PRINT.name()+" Demo Jedi");
+
+            printCommand.execute(new String[]{"print","Demo","Jedi"});
+
+            System.out.println(">"+Commands.PRINT.name()+" Dagobah");
+
+            printCommand.execute(new String[]{"print","Dagobah"});
+
+            System.out.println();
+            Command removeJediCommand = commands.get(Commands.REMOVE_JEDI);
+            System.out.println(">"+Commands.REMOVE_JEDI.name()+" Jedi Test TU\n");
+
+            removeJediCommand.execute(new String[]{"remove_jedi","Jedi","Test","TU"});
+
+            System.out.println();
+            System.out.println(">"+Commands.PRINT.name()+" TU");
+
+            printCommand.execute(new String[]{"print","TU"});
+
+
+
+        } catch (CommandException | IOException e) {
+            System.err.println("Demo failed: " + e.getMessage());
+        }
+    }
 
     private String getCurrentFile() {
         return this.openedFile;
