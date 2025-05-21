@@ -64,10 +64,7 @@ public class CLI {
             }
 
             String commandName = args[0];
-            
-            if(commandName.equals("-")){
-                
-            }
+
 
             if (fileSupplier.get() == null && !commandName.equals("open") && !commandName.equals("help") && !commandName.equals("exit")) {
 
